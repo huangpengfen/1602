@@ -1,0 +1,75 @@
+C51 COMPILER V8.18   AT24CXX                                                               12/02/2011 10:31:30 PAGE 1   
+
+
+C51 COMPILER V8.18, COMPILATION OF MODULE AT24CXX
+OBJECT MODULE PLACED IN AT24Cxx.OBJ
+COMPILER INVOKED BY: D:\Program Files\Keil\C51\BIN\C51.EXE AT24Cxx.c BROWSE INCDIR(.\library) DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /********************************************************************************************************
+   2          *
+   3          * File                : AT24Cxx.c
+   4          * Hardware Environment: DVK501 && F320 EX
+   5          * Build Environment   : uVision3 V3.80 20100913
+   6          * Version             : 
+   7          * By                  : Su Wei Feng
+   8          *
+   9          *                                  (c) Copyright 2005-2010, WaveShare
+  10          *                                       http://www.waveshare.net
+  11          *                                          All Rights Reserved
+  12          *
+  13          *********************************************************************************************************/
+  14          
+  15          #define _DVK501_F320_EX_ 
+  16          
+  17          #include <c8051f320.h>
+  18          #include <ws_clock.h>
+  19          #include <ws_delay.h>
+  20          #include <ws_iic_port.h>
+  21          #include <ws_at24cxx.h>
+  22          #include <ws_lcd_st7920_port.h>
+  23          
+  24          void main(void)
+  25          {
+  26   1              uchar *pRdDat;  
+  27   1      
+  28   1              PCA0MD &= ~0x40;            // Clear watchdog timer enable
+  29   1              clock_external();                       // Set oscillator in external,the clock is 12M
+  30   1              delay_ms(100);
+  31   1              Check_SDA();    
+  32   1              XBR1 = 0x40;                // Enable crossbar and weak pull-ups
+  33   1              SPI_Init();
+  34   1              st7920LcdInit();
+  35   1              SMBus_Init();
+  36   1              Enb_Interrupt(); 
+  37   1      
+  38   1              showLine(0,0,lcd_buffer,"AT24Cxx Example");
+  39   1              showLine(0,1,lcd_buffer,"Program and");
+  40   1              showLine(0,2,lcd_buffer,"Verify");
+  41   1              showLine(0,3,lcd_buffer,"Results:");
+  42   1              refreshLCD(lcd_buffer); 
+  43   1      
+  44   1              Write_AT24Cxx(0x00,'P');
+  45   1              Read_AT24Cxx(0x00,pRdDat);
+  46   1              showLine(9,3,lcd_buffer,"%c",*pRdDat);
+  47   1              refreshLCD(lcd_buffer); 
+  48   1              
+  49   1              while(1);
+  50   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1599    ----
+   CONSTANT SIZE    =     47    ----
+C51 COMPILER V8.18   AT24CXX                                                               12/02/2011 10:31:30 PAGE 2   
+
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10      62
+   IDATA SIZE       =     64    ----
+   BIT SIZE         =      2       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

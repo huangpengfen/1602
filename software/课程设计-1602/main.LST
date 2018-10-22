@@ -1,0 +1,497 @@
+C51 COMPILER V9.01   MAIN                                                                  05/09/2018 23:33:50 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\software_install\KEIL4\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          
+   2          /*
+   3          //键盘P15 P16 P17        
+   4          //蜂鸣器 P00  spk=0蜂鸣器响
+   5          继电器 P24
+   6          按键  P33  P34  P35
+   7          at24C02  SCL P23
+   8                           SDA P24
+   9          DHT11   P17
+  10          1602    数据/命令选择端rs P25
+  11                          读写控制端 P26
+  12                          使能端：P27 
+  13                          数据口：P0
+  14          */
+  15          
+  16          
+  17          #include "reg52.h"
+  18          #include "intrins.h"
+  19          #include "1602.h"
+  20          #include "DHT11.h"
+  21          #include "AT24C02.h"
+  22          //按键设置引脚
+  23          sbit an1 = P3^5;
+  24          sbit an2 = P3^4;
+  25          sbit an3 = P3^3;
+  26          //继电器
+  27          sbit jidianqi = P3^6;
+  28          //蜂鸣器
+  29          sbit fengmingqi = P1^0;
+  30          //标志位  作为模式选择用的
+  31          unsigned char flag=0;     //flag=0,1,2,3,4,5  分别对应正常显示温湿度值，设置湿度的上限，设置湿度的下限，设
+             -置温度的上限，设置温度的下限，
+  32                                                           //检测到设置好值后写入at24c01保存然后继续正常显示(即返回0)
+  33          uchar shidu_gao=90, shidu_di=40, wendu_gao=0, wendu_di=50;         //设置湿度与温度的阈值（分别对应湿度高，湿度
+             -低，温度高，温度低）
+  34          
+  35          unsigned char no_loop = 0;
+  36          
+  37          unsigned char xdata sdd1[5];
+  38          unsigned char xdata sdd2[5];
+  39          
+  40          unsigned char xdata sdd3[16];
+  41          unsigned char xdata sdd4[16];   
+  42          unsigned char xdata sdd5[16];
+  43          unsigned char xdata sdd6[16];              //1602输出数组
+  44          
+  45          unsigned char code she[]="H and T is OK";
+  46          unsigned char code zhi[]="data changing...";    //这两个数组是在系统设置阈值后显示写入at24c02的状态
+  47          
+  48          unsigned char code kai[]="H Design by LST.";
+  49          unsigned char code shi[]="  DORM: B9-516  ";    //这连个数组可以自由发挥，写自己的名字等
+  50          
+  51          unsigned char code ban[]="AUTOMATION";
+  52          unsigned char code ji[]="ClASS-1";                 //写上专业，班级
+  53          
+C51 COMPILER V9.01   MAIN                                                                  05/09/2018 23:33:50 PAGE 2   
+
+  54          void delay_10_us(unsigned int num)               //延时函数，延时时间为10us
+  55          {
+  56   1              while(num--)
+  57   1                      ;
+  58   1      }                          
+  59          
+  60          /********************************************************************
+  61           * 函数名：delay_ms
+  62           * 描述  ：软件毫秒级延时(12Mhz的晶振)
+  63           * 输入  ：-num:        控制需要延时多少毫秒。如num等于1，即延时1毫秒
+  64           * 输出  ：无
+  65           * 调用  ：外部调用
+  66           ********************************************************************/
+  67          void delay__ms(unsigned int num)                   //延时函数，延时时间为xms
+  68          {
+  69   1              unsigned int i;
+  70   1              for(i=0;i<num;i++)
+  71   1              {
+  72   2                      delay_10_us(100);
+  73   2              }
+  74   1      }
+  75          
+  76          //独立按键扫描
+  77          void keyscan(void)
+  78          {
+  79   1              if (an1 == 0)
+  80   1              {
+  81   2                      delay__ms(5);
+  82   2                      if (an1 == 0)
+  83   2                      {
+  84   3                               //功能切换：切换湿度还是温度改变，最大阈值还是最小阈值
+  85   3                               flag++;
+  86   3      
+  87   3                      }
+  88   2                      while (!an1);
+  89   2              }
+  90   1              else if (an2 == 0)
+  91   1              {
+  92   2                      delay__ms(5);
+  93   2                      if (an2 == 0)
+  94   2                      {
+  95   3                              //湿度/温度上升1
+  96   3                              switch(flag)
+  97   3                              {
+  98   4                                      case 1: //调节湿度上限
+  99   4                                              shidu_gao++;
+ 100   4                                              break;
+ 101   4                                      case 2: //调节湿度下限
+ 102   4                                              shidu_di++;
+ 103   4                                              break;
+ 104   4                                      case 3: //调节温度上限
+ 105   4                                              wendu_gao++;
+ 106   4                                              break;
+ 107   4                                      case 4: //调节温度下限
+ 108   4                                              wendu_di++;
+ 109   4                                              break;
+ 110   4                                      default:
+ 111   4                                              break;
+ 112   4                              }
+ 113   3                                              
+ 114   3                      }
+ 115   2                      while (!an2);
+C51 COMPILER V9.01   MAIN                                                                  05/09/2018 23:33:50 PAGE 3   
+
+ 116   2              }
+ 117   1              else if (an3 == 0)
+ 118   1              {
+ 119   2                      delay__ms(5);
+ 120   2                      if (an3 == 0)
+ 121   2                      {
+ 122   3                              //湿度/温度下降1
+ 123   3                              switch(flag)
+ 124   3                              {
+ 125   4                                      case 1: //调节湿度上限
+ 126   4                                              shidu_gao--;
+ 127   4                                              break;
+ 128   4                                      case 2: //调节湿度下限
+ 129   4                                              shidu_di--;
+ 130   4                                              break;
+ 131   4                                      case 3: //调节温度上限
+ 132   4                                              wendu_gao--;
+ 133   4                                              break;
+ 134   4                                      case 4: //调节温度下限
+ 135   4                                              wendu_di--;
+ 136   4                                              break;
+ 137   4                                      default:
+ 138   4                                              break;
+ 139   4                              }
+ 140   3                      }
+ 141   2                      while (!an3);
+ 142   2              }
+ 143   1      }
+ 144          
+ 145          void baojing(void)              //报警函数，当超出阈值时报警
+ 146          {
+ 147   1              if (U8RH_data_H<shidu_di || U8RH_data_H>shidu_gao)
+ 148   1              {
+ 149   2                      //湿度报警
+ 150   2                      jidianqi = 0;
+ 151   2                      fengmingqi = 0;
+ 152   2              }
+ 153   1              else if (U8T_data_H<wendu_di || U8T_data_H>wendu_gao)
+ 154   1              {
+ 155   2                      //温度报警
+ 156   2                      jidianqi = 0;
+ 157   2                      fengmingqi = 0;
+ 158   2              }
+ 159   1              else
+ 160   1              {
+ 161   2                      //没报警
+ 162   2                      jidianqi = 1;
+ 163   2                      fengmingqi = 1;
+ 164   2              }
+ 165   1      }
+ 166          
+ 167          void Timer1Init(void)           //定时器
+ 168          {
+ 169   1              TMOD = 0x20;      //定时器T1使用工作方式2
+ 170   1              TH1 = 253;        // 设置初值
+ 171   1              TL1 = 253;
+ 172   1              TR1 = 1;          // 开始计时
+ 173   1              SCON = 0x50;      //工作方式1，波特率9600bps，允许接收   
+ 174   1              ES = 1;
+ 175   1              EA = 1;           // 打开所以中断   
+ 176   1              TI = 0;
+ 177   1              RI = 0;
+C51 COMPILER V9.01   MAIN                                                                  05/09/2018 23:33:50 PAGE 4   
+
+ 178   1      }
+ 179          
+ 180          void Timer0Init(void)           //定时器初始化，10毫秒@12.000MHz
+ 181          {
+ 182   1              TMOD &= 0xF0;           //设置定时器模式
+ 183   1              TL0 = 0xF0;             //设置定时初值
+ 184   1              TH0 = 0xD8;             //设置定时初值
+ 185   1              TF0 = 0;                //清除TF0标志
+ 186   1              TR0 = 1;                //定时器0开始计时
+ 187   1      
+ 188   1              ET0 = 1;
+ 189   1              EA = 1;
+ 190   1      }
+ 191                  
+ 192          
+ 193          void timer0() interrupt 1               //定时器服务函数
+ 194          {
+ 195   1              if (1 == no_loop)
+ 196   1              {
+ 197   2                      keyscan();
+ 198   2                      baojing();
+ 199   2              }
+ 200   1      }
+ 201          
+ 202          
+ 203          void zhuanhua()                   //将获取到的数据转化成能够在1602显示的字符
+ 204          {
+ 205   1              sdd1[2]=str[0]/100+48;
+ 206   1              sdd1[3]=str[0]%100/10+48;
+ 207   1              sdd1[4]=str[0]%10+48;            //收集到的湿度数据转化后（显示液晶）
+ 208   1      
+ 209   1              sdd2[2]=str[2]/100+48;
+ 210   1              sdd2[3]=str[2]%100/10+48;
+ 211   1              sdd2[4]=str[2]%10+48;           //收集到的温度数据转化后（显示液晶）
+ 212   1      
+ 213   1              sdd3[6]=shidu_gao/100+48;
+ 214   1              sdd3[7]=shidu_gao%100/10+48;
+ 215   1              sdd3[8]=shidu_gao%10+48;                //收集到的温度数据转化后（显示液晶）
+ 216   1      
+ 217   1              sdd4[6]=shidu_di/100+48;
+ 218   1              sdd4[7]=shidu_di%100/10+48;
+ 219   1              sdd4[8]=shidu_di%10+48;         //收集到的温度数据转化后（显示液晶）
+ 220   1      
+ 221   1              sdd5[6]=wendu_gao/100+48;
+ 222   1              sdd5[7]=wendu_gao%100/10+48;
+ 223   1              sdd5[8]=wendu_gao%10+48;                //收集到的温度数据转化后（显示液晶）
+ 224   1      
+ 225   1              sdd6[6]=wendu_di/100+48;
+ 226   1              sdd6[7]=wendu_di%100/10+48;
+ 227   1              sdd6[8]=wendu_di%10+48;         //收集到的温度数据转化后（显示液晶）
+ 228   1      }
+ 229          
+ 230          
+ 231          /***********************************************************************
+ 232          * 函数名：lcd_display
+ 233          * 描述：1602液晶显示函数
+ 234          * 输入：无
+ 235          * 输出：无
+ 236          * 调用：外部调用
+ 237          ***********************************************************************/
+ 238          void lcd_displayKS()               //系统接上电后一开始显示的那个数组
+ 239          { 
+C51 COMPILER V9.01   MAIN                                                                  05/09/2018 23:33:50 PAGE 5   
+
+ 240   1                      unsigned char num1;
+ 241   1                      
+ 242   1                      write_command(0x80+0x00);
+ 243   1                      for(num1=0;num1<16;num1++)
+ 244   1                              write_data(kai[num1]);          
+ 245   1      
+ 246   1                      write_command(0x80+0x40);
+ 247   1                      for(num1=0;num1<16;num1++)
+ 248   1                              write_data(shi[num1]);                  
+ 249   1      }
+ 250          
+ 251          void lcd_display1()
+ 252          { 
+ 253   1                      unsigned char num1;
+ 254   1                      
+ 255   1                      write_command(0x80+0x00);
+ 256   1                      for(num1=0;num1<5;num1++)
+ 257   1                              write_data(sdd1[num1]);                 
+ 258   1      
+ 259   1                      write_command(0x80+0x40);
+ 260   1                      for(num1=0;num1<5;num1++)
+ 261   1                              write_data(sdd2[num1]);         
+ 262   1      }
+ 263          
+ 264          void lcd_display2()
+ 265          { 
+ 266   1                      unsigned char num1;
+ 267   1                      unsigned char var_1;
+ 268   1                      unsigned char var_2;
+ 269   1      
+ 270   1                      if (1 == flag)
+ 271   1                      {
+ 272   2                              var_1 = 16;
+ 273   2                              var_2 = 9;      
+ 274   2                      }
+ 275   1                      else if (2 == flag)
+ 276   1                      {
+ 277   2                              var_1 = 9;
+ 278   2                              var_2 = 16;
+ 279   2                      }
+ 280   1                      write_command(0x80+0x00);
+ 281   1                      for(num1=0;num1<var_1;num1++)
+ 282   1                              write_data(sdd3[num1]);  
+ 283   1      
+ 284   1                      write_command(0x80+0x40);
+ 285   1                      for(num1=0;num1<var_2;num1++)
+ 286   1                              write_data(sdd4[num1]);                 
+ 287   1      }
+ 288          
+ 289          void lcd_display3()
+ 290          { 
+ 291   1                      unsigned char num1;
+ 292   1                      unsigned char var_1;
+ 293   1                      unsigned char var_2;
+ 294   1      
+ 295   1                      if (3 == flag)
+ 296   1                      {
+ 297   2                              var_1 = 16;
+ 298   2                              var_2 = 9;      
+ 299   2                      }
+ 300   1                      else if (4 == flag)
+ 301   1                      {
+C51 COMPILER V9.01   MAIN                                                                  05/09/2018 23:33:50 PAGE 6   
+
+ 302   2                              var_1 = 9;
+ 303   2                              var_2 = 16;
+ 304   2                      }               
+ 305   1      
+ 306   1                      write_command(0x80+0x00);
+ 307   1                      for(num1=0;num1<var_1;num1++)
+ 308   1                              write_data(sdd5[num1]);         
+ 309   1      
+ 310   1                      write_command(0x80+0x40);
+ 311   1                      for(num1=0;num1<var_2;num1++)
+ 312   1                              write_data(sdd6[num1]);         
+ 313   1      }
+ 314          
+ 315          void lcd_display4()
+ 316          { 
+ 317   1                      unsigned char num1;
+ 318   1                      
+ 319   1                      write_command(0x80+0x00);
+ 320   1                      for(num1=0;num1<13;num1++)
+ 321   1                              write_data(she[num1]);          
+ 322   1      
+ 323   1                      write_command(0x80+0x40);
+ 324   1                      for(num1=0;num1<16;num1++)
+ 325   1                              write_data(zhi[num1]);          
+ 326   1      }
+ 327          
+ 328          void lcd_display5()
+ 329          { 
+ 330   1                      unsigned char num1;
+ 331   1                      
+ 332   1                      write_command(0x80+0x03);
+ 333   1                      for(num1=0;num1<10;num1++)
+ 334   1                              write_data(ban[num1]);                  
+ 335   1      
+ 336   1                      write_command(0x80+0x45);
+ 337   1                      for(num1=0;num1<7;num1++)
+ 338   1                              write_data(ji[num1]);           
+ 339   1      }
+ 340          
+ 341          void init_all(void)             //系统初始化
+ 342          {
+ 343   1              Timer1Init();   //串口定时器初始化
+ 344   1              Timer0Init();   //定时器0初始化
+ 345   1              lcd_init();                                      //初始化1602液晶       
+ 346   1              jidianqi = 1;
+ 347   1              fengmingqi = 1;
+ 348   1              lcd_displayKS();
+ 349   1              delay__ms(1500);
+ 350   1      //      lcd_init();     
+ 351   1      }
+ 352          
+ 353          void main(void)
+ 354          {
+ 355   1              init_all();
+ 356   1      
+ 357   1              write_command(0x01);    //清屏
+ 358   1              lcd_display5();
+ 359   1              delay__ms(1500);
+ 360   1              
+ 361   1      //      SendData(str) ;   //发送到串口 
+ 362   1      //      Delay_t(1);         //延时100US（12M晶振)
+ 363   1      //
+C51 COMPILER V9.01   MAIN                                                                  05/09/2018 23:33:50 PAGE 7   
+
+ 364   1      //      delay(4000);
+ 365   1      
+ 366   1      //EEPROM
+ 367   1      //      IIC_EEPROM_Write(0x20, 90);
+ 368   1      //              delay__ms(1000);
+ 369   1      //      IIC_EEPROM_Write(0x22, 20);
+ 370   1      //              delay__ms(1000);
+ 371   1      //      IIC_EEPROM_Write(0x24, 50);
+ 372   1      //              delay__ms(1000);
+ 373   1      //      IIC_EEPROM_Write(0x26, 0);       
+ 374   1      //              delay__ms(1000);delay__ms(2000);                                //烧录完一次后就不用了
+ 375   1      
+ 376   1              sdd1[0]='H'; sdd1[1]=':';
+ 377   1              sdd2[0]='T'; sdd2[1]=':';
+ 378   1              sdd3[0]='H'; sdd3[1]='-'; sdd3[2]='G'; sdd3[3]='A'; sdd3[4]='O'; sdd3[5]=':'; sdd3[9]=' ';sdd3[10]='c';sd
+             -d3[11]='h';sdd3[12]='a';sdd3[13]='n';sdd3[14]='g';sdd3[15]='e';
+ 379   1              sdd4[0]='H'; sdd4[1]='-'; sdd4[2]='D'; sdd4[3]='I'; sdd4[4]=' '; sdd4[5]=':'; sdd4[9]=' ';sdd4[10]='c';sd
+             -d4[11]='h';sdd4[12]='a';sdd4[13]='n';sdd4[14]='g';sdd4[15]='e';
+ 380   1              sdd5[0]='T'; sdd5[1]='-'; sdd5[2]='G'; sdd5[3]='A'; sdd5[4]='O'; sdd5[5]=':'; sdd5[9]=' ';sdd5[10]='c';sd
+             -d5[11]='h';sdd5[12]='a';sdd5[13]='n';sdd5[14]='g';sdd5[15]='e';
+ 381   1              sdd6[0]='T'; sdd6[1]='-'; sdd6[2]='D'; sdd6[3]='I'; sdd6[4]=' '; sdd6[5]=':'; sdd6[9]=' ';sdd6[10]='c';sd
+             -d6[11]='h';sdd6[12]='a';sdd6[13]='n';sdd6[14]='g';sdd6[15]='e';
+ 382   1      
+ 383   1              //芯片一上电就读取保存好的在AT24C02里面的值
+ 384   1              shidu_gao = IIC_EEPROM_Read(0x20);
+ 385   1              delay__ms(300);
+ 386   1              shidu_di = IIC_EEPROM_Read(0x22);
+ 387   1              delay__ms(300);
+ 388   1              wendu_gao = IIC_EEPROM_Read(0x24);
+ 389   1              delay__ms(300);
+ 390   1              wendu_di = IIC_EEPROM_Read(0x26);
+ 391   1              delay__ms(300); delay__ms(300);
+ 392   1      
+ 393   1              no_loop = 1;
+ 394   1      
+ 395   1              while(1)
+ 396   1              {
+ 397   2                      zhuanhua();
+ 398   2                      
+ 399   2                      if (flag > 4)      //温度上下值设置完成
+ 400   2                      {
+ 401   3      //                       lcd_init();
+ 402   3                               write_command(0x01);   //清屏
+ 403   3                               lcd_display4();    //显示正在设置OK
+ 404   3      
+ 405   3                               IIC_EEPROM_Write(0x20, shidu_gao);
+ 406   3                               delay__ms(1000);
+ 407   3                               IIC_EEPROM_Write(0x22, shidu_di);
+ 408   3                               delay__ms(1000);
+ 409   3                               IIC_EEPROM_Write(0x24, wendu_gao);
+ 410   3                               delay__ms(1000);
+ 411   3                               IIC_EEPROM_Write(0x26, wendu_di);
+ 412   3                               delay__ms(1000);
+ 413   3                      }
+ 414   2      
+ 415   2                      if (0 == flag)
+ 416   2                      {
+ 417   3                              write_command(0x01);    //清屏
+ 418   3                              lcd_display1();
+ 419   3                      }
+ 420   2                      else if (flag>4)
+ 421   2                      {
+C51 COMPILER V9.01   MAIN                                                                  05/09/2018 23:33:50 PAGE 8   
+
+ 422   3                              flag = 0;
+ 423   3                      }
+ 424   2                      else
+ 425   2                      {
+ 426   3                              if (1==flag || 2==flag)
+ 427   3                              {
+ 428   4      
+ 429   4                                      write_command(0x01);    //清屏
+ 430   4                                      lcd_display2();
+ 431   4                              }
+ 432   3                              else if (3==flag || 4==flag)
+ 433   3                              {
+ 434   4                                      write_command(0x01);    //清屏
+ 435   4                                      lcd_display3();
+ 436   4                              }
+ 437   3                      }
+ 438   2                      
+ 439   2      
+ 440   2                      //接受温湿度传感器的四个数据
+ 441   2                         RH();
+ 442   2                 str[0]=U8RH_data_H;
+ 443   2                 str[1]=U8RH_data_L;
+ 444   2                 str[2]=U8T_data_H;
+ 445   2                 str[3]=U8T_data_L;
+ 446   2                 str[4]=U8checkdata;
+ 447   2      
+ 448   2      //         SendData(str) ;  //发送到串口
+ 449   2      //         SendData(sdd1);  
+ 450   2      //         SendData(sdd2);  
+ 451   2                 //读取模块数据周期不易小于 2S 
+ 452   2                 Delay_t(10000);
+ 453   2              }
+ 454   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   2189    ----
+   CONSTANT SIZE    =     90    ----
+   XDATA SIZE       =     74    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     42       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

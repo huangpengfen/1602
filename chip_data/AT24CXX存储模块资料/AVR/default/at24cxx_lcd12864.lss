@@ -1,0 +1,1746 @@
+
+at24cxx_lcd12864.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000002c  00800100  00000886  0000091a  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000886  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000040  0080012c  0080012c  00000946  2**0
+                  ALLOC
+  3 .debug_aranges 00000020  00000000  00000000  00000946  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 00000183  00000000  00000000  00000966  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000007cd  00000000  00000000  00000ae9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000023f  00000000  00000000  000012b6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000008c7  00000000  00000000  000014f5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000170  00000000  00000000  00001dbc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000002b3  00000000  00000000  00001f2c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000060a  00000000  00000000  000021df  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 46 00 	jmp	0x8c	; 0x8c <__ctors_end>
+   4:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+   8:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+   c:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  10:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  14:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  18:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  1c:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  20:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  24:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  28:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  2c:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  30:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  34:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  38:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  3c:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  40:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  44:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  48:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  4c:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  50:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  54:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  58:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  5c:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  60:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  64:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  68:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  6c:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  70:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  74:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  78:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  7c:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  80:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  84:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+  88:	0c 94 63 00 	jmp	0xc6	; 0xc6 <__bad_interrupt>
+
+0000008c <__ctors_end>:
+  8c:	11 24       	eor	r1, r1
+  8e:	1f be       	out	0x3f, r1	; 63
+  90:	cf ef       	ldi	r28, 0xFF	; 255
+  92:	d0 e1       	ldi	r29, 0x10	; 16
+  94:	de bf       	out	0x3e, r29	; 62
+  96:	cd bf       	out	0x3d, r28	; 61
+
+00000098 <__do_copy_data>:
+  98:	11 e0       	ldi	r17, 0x01	; 1
+  9a:	a0 e0       	ldi	r26, 0x00	; 0
+  9c:	b1 e0       	ldi	r27, 0x01	; 1
+  9e:	e6 e8       	ldi	r30, 0x86	; 134
+  a0:	f8 e0       	ldi	r31, 0x08	; 8
+  a2:	02 c0       	rjmp	.+4      	; 0xa8 <.do_copy_data_start>
+
+000000a4 <.do_copy_data_loop>:
+  a4:	05 90       	lpm	r0, Z+
+  a6:	0d 92       	st	X+, r0
+
+000000a8 <.do_copy_data_start>:
+  a8:	ac 32       	cpi	r26, 0x2C	; 44
+  aa:	b1 07       	cpc	r27, r17
+  ac:	d9 f7       	brne	.-10     	; 0xa4 <.do_copy_data_loop>
+
+000000ae <__do_clear_bss>:
+  ae:	11 e0       	ldi	r17, 0x01	; 1
+  b0:	ac e2       	ldi	r26, 0x2C	; 44
+  b2:	b1 e0       	ldi	r27, 0x01	; 1
+  b4:	01 c0       	rjmp	.+2      	; 0xb8 <.do_clear_bss_start>
+
+000000b6 <.do_clear_bss_loop>:
+  b6:	1d 92       	st	X+, r1
+
+000000b8 <.do_clear_bss_start>:
+  b8:	ac 36       	cpi	r26, 0x6C	; 108
+  ba:	b1 07       	cpc	r27, r17
+  bc:	e1 f7       	brne	.-8      	; 0xb6 <.do_clear_bss_loop>
+  be:	0e 94 62 03 	call	0x6c4	; 0x6c4 <main>
+  c2:	0c 94 41 04 	jmp	0x882	; 0x882 <_exit>
+
+000000c6 <__bad_interrupt>:
+  c6:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000ca <twi_init>:
+
+void twi_init()	 	 	//TWI(I2C)初始化
+{
+/*Hardware Environment：DVK501 && M128+ EX*/
+#if defined(_DVK501_M128_EX_)
+	TWBR = 0X0F;		//设置TWI波特率  
+  ca:	8f e0       	ldi	r24, 0x0F	; 15
+  cc:	80 93 70 00 	sts	0x0070, r24
+	TWSR &= 0XFC;		//设置TWI预分频 为 1
+  d0:	e1 e7       	ldi	r30, 0x71	; 113
+  d2:	f0 e0       	ldi	r31, 0x00	; 0
+  d4:	80 81       	ld	r24, Z
+  d6:	8c 7f       	andi	r24, 0xFC	; 252
+  d8:	80 83       	st	Z, r24
+	TWSR &= 0XFC;		//设置TWI预分频 为 1
+	
+#else
+  #warning "iic interface undefined."
+#endif
+}
+  da:	08 95       	ret
+
+000000dc <I2C_Start>:
+输    入：
+返    回：
+--------------------------------------------------------------------*/
+uint8_t I2C_Start()					
+{
+	I2CStart();						
+  dc:	84 ea       	ldi	r24, 0xA4	; 164
+  de:	80 93 74 00 	sts	0x0074, r24
+	I2CWaitAck();
+  e2:	80 91 74 00 	lds	r24, 0x0074
+  e6:	87 ff       	sbrs	r24, 7
+  e8:	fc cf       	rjmp	.-8      	; 0xe2 <I2C_Start+0x6>
+	if( I2CChkAck()!=I2C_START ) 
+  ea:	80 91 71 00 	lds	r24, 0x0071
+  ee:	90 e0       	ldi	r25, 0x00	; 0
+  f0:	88 7f       	andi	r24, 0xF8	; 248
+  f2:	88 30       	cpi	r24, 0x08	; 8
+  f4:	09 f4       	brne	.+2      	; 0xf8 <I2C_Start+0x1c>
+  f6:	91 e0       	ldi	r25, 0x01	; 1
+		return I2C_ERR;
+	return I2C_CRR;
+}
+  f8:	89 2f       	mov	r24, r25
+  fa:	08 95       	ret
+
+000000fc <I2C_Restart>:
+输    入：
+返    回：
+--------------------------------------------------------------------*/
+uint8_t I2C_Restart()					
+{
+	I2CStart();						
+  fc:	84 ea       	ldi	r24, 0xA4	; 164
+  fe:	80 93 74 00 	sts	0x0074, r24
+	I2CWaitAck();
+ 102:	80 91 74 00 	lds	r24, 0x0074
+ 106:	87 ff       	sbrs	r24, 7
+ 108:	fc cf       	rjmp	.-8      	; 0x102 <I2C_Restart+0x6>
+	if( I2CChkAck()!=I2C_RESTART ) 
+ 10a:	80 91 71 00 	lds	r24, 0x0071
+ 10e:	90 e0       	ldi	r25, 0x00	; 0
+ 110:	88 7f       	andi	r24, 0xF8	; 248
+ 112:	80 31       	cpi	r24, 0x10	; 16
+ 114:	09 f4       	brne	.+2      	; 0x118 <I2C_Restart+0x1c>
+ 116:	91 e0       	ldi	r25, 0x01	; 1
+		return I2C_ERR;
+	return I2C_CRR;
+}
+ 118:	89 2f       	mov	r24, r25
+ 11a:	08 95       	ret
+
+0000011c <I2C_SendWrDAdr>:
+输    入：
+返    回：
+--------------------------------------------------------------------*/
+uint8_t I2C_SendWrDAdr(uint8_t wrDAdr)	
+{
+	I2CSendByte(wrDAdr);			//设置 器件写地址
+ 11c:	80 93 73 00 	sts	0x0073, r24
+ 120:	84 e8       	ldi	r24, 0x84	; 132
+ 122:	80 93 74 00 	sts	0x0074, r24
+	I2CWaitAck();
+ 126:	80 91 74 00 	lds	r24, 0x0074
+ 12a:	87 ff       	sbrs	r24, 7
+ 12c:	fc cf       	rjmp	.-8      	; 0x126 <I2C_SendWrDAdr+0xa>
+	if( I2CChkAck()!=I2C_MT_SLA_ACK )
+ 12e:	80 91 71 00 	lds	r24, 0x0071
+ 132:	90 e0       	ldi	r25, 0x00	; 0
+ 134:	88 7f       	andi	r24, 0xF8	; 248
+ 136:	88 31       	cpi	r24, 0x18	; 24
+ 138:	09 f4       	brne	.+2      	; 0x13c <I2C_SendWrDAdr+0x20>
+ 13a:	91 e0       	ldi	r25, 0x01	; 1
+		return I2C_ERR;
+	return I2C_CRR;
+}
+ 13c:	89 2f       	mov	r24, r25
+ 13e:	08 95       	ret
+
+00000140 <I2C_SendWrDAdr_>:
+提示说明：兼容 发送 7位 器件写地址: XXXX XXX0
+输    入：
+返    回：
+--------------------------------------------------------------------*/
+uint8_t I2C_SendWrDAdr_(uint16_t wrDAdr)	
+{
+ 140:	cf 93       	push	r28
+ 142:	df 93       	push	r29
+ 144:	ec 01       	movw	r28, r24
+	if( (wrDAdr&0xF000) == 0xF000 )	//判断是否为 10位 器件地址
+ 146:	80 70       	andi	r24, 0x00	; 0
+ 148:	90 7f       	andi	r25, 0xF0	; 240
+ 14a:	80 50       	subi	r24, 0x00	; 0
+ 14c:	90 4f       	sbci	r25, 0xF0	; 240
+ 14e:	29 f4       	brne	.+10     	; 0x15a <I2C_SendWrDAdr_+0x1a>
+		if( I2C_SendWrDAdr( (uint8_t)wrDAdr>>8 )==I2C_ERR )	//设置 （高位）器件写地址
+ 150:	80 e0       	ldi	r24, 0x00	; 0
+ 152:	0e 94 8e 00 	call	0x11c	; 0x11c <I2C_SendWrDAdr>
+ 156:	88 23       	and	r24, r24
+ 158:	29 f0       	breq	.+10     	; 0x164 <I2C_SendWrDAdr_+0x24>
+			return I2C_ERR;
+	if( I2C_SendWrDAdr( (uint8_t)wrDAdr )==I2C_ERR )	//设置 （低位）器件写地址
+ 15a:	8c 2f       	mov	r24, r28
+ 15c:	0e 94 8e 00 	call	0x11c	; 0x11c <I2C_SendWrDAdr>
+ 160:	81 11       	cpse	r24, r1
+ 162:	81 e0       	ldi	r24, 0x01	; 1
+		return I2C_ERR;
+	return I2C_CRR;
+}
+ 164:	df 91       	pop	r29
+ 166:	cf 91       	pop	r28
+ 168:	08 95       	ret
+
+0000016a <I2C_SendRdDAdr>:
+输    入：
+返    回：
+--------------------------------------------------------------------*/
+uint8_t I2C_SendRdDAdr(uint8_t rdDAdr)	
+{
+	I2CSendByte(rdDAdr);			//设置 器件读地址
+ 16a:	80 93 73 00 	sts	0x0073, r24
+ 16e:	84 e8       	ldi	r24, 0x84	; 132
+ 170:	80 93 74 00 	sts	0x0074, r24
+	I2CWaitAck();
+ 174:	80 91 74 00 	lds	r24, 0x0074
+ 178:	87 ff       	sbrs	r24, 7
+ 17a:	fc cf       	rjmp	.-8      	; 0x174 <I2C_SendRdDAdr+0xa>
+	if( I2CChkAck()!=I2C_MR_SLA_ACK )  
+ 17c:	80 91 71 00 	lds	r24, 0x0071
+ 180:	90 e0       	ldi	r25, 0x00	; 0
+ 182:	88 7f       	andi	r24, 0xF8	; 248
+ 184:	80 34       	cpi	r24, 0x40	; 64
+ 186:	09 f4       	brne	.+2      	; 0x18a <I2C_SendRdDAdr+0x20>
+ 188:	91 e0       	ldi	r25, 0x01	; 1
+		return I2C_ERR;
+	return I2C_CRR;	
+}
+ 18a:	89 2f       	mov	r24, r25
+ 18c:	08 95       	ret
+
+0000018e <I2C_SendRdDAdr_>:
+uint8_t I2C_SendRdDAdr_(uint8_t rdDAdr)	
+{
+	if( (rdDAdr&0xF000) == 0xF000)	//判断是否为 10位 器件地址
+		if( I2C_SendWrDAdr( (uint8_t)rdDAdr>>8 )==I2C_ERR )	//设置 （高位）器件读地址
+			return I2C_ERR;
+	if( I2C_SendWrDAdr( (uint8_t)rdDAdr )==I2C_ERR )	//设置 （低位）器件读地址
+ 18e:	0e 94 8e 00 	call	0x11c	; 0x11c <I2C_SendWrDAdr>
+ 192:	81 11       	cpse	r24, r1
+ 194:	81 e0       	ldi	r24, 0x01	; 1
+		return I2C_ERR;
+	return I2C_CRR;
+}
+ 196:	08 95       	ret
+
+00000198 <I2C_SendDat>:
+输    入：
+返    回：
+--------------------------------------------------------------------*/
+uint8_t I2C_SendDat(uint8_t configDat)	
+{
+	I2CSendByte(configDat);			
+ 198:	80 93 73 00 	sts	0x0073, r24
+ 19c:	84 e8       	ldi	r24, 0x84	; 132
+ 19e:	80 93 74 00 	sts	0x0074, r24
+	I2CWaitAck();
+ 1a2:	80 91 74 00 	lds	r24, 0x0074
+ 1a6:	87 ff       	sbrs	r24, 7
+ 1a8:	fc cf       	rjmp	.-8      	; 0x1a2 <I2C_SendDat+0xa>
+	if( I2CChkAck()!=I2C_MT_DATA_ACK ) 
+ 1aa:	80 91 71 00 	lds	r24, 0x0071
+ 1ae:	90 e0       	ldi	r25, 0x00	; 0
+ 1b0:	88 7f       	andi	r24, 0xF8	; 248
+ 1b2:	88 32       	cpi	r24, 0x28	; 40
+ 1b4:	09 f4       	brne	.+2      	; 0x1b8 <I2C_SendDat+0x20>
+ 1b6:	91 e0       	ldi	r25, 0x01	; 1
+		return I2C_ERR;
+	return I2C_CRR;	
+}
+ 1b8:	89 2f       	mov	r24, r25
+ 1ba:	08 95       	ret
+
+000001bc <I2C_RcvNAckDat>:
+提示说明：
+输    入：
+返    回：
+--------------------------------------------------------------------*/
+uint8_t I2C_RcvNAckDat(uint8_t *pRdDat)	
+{
+ 1bc:	fc 01       	movw	r30, r24
+	I2CRcvNckByte();
+ 1be:	84 e8       	ldi	r24, 0x84	; 132
+ 1c0:	80 93 74 00 	sts	0x0074, r24
+	I2CWaitAck();
+ 1c4:	80 91 74 00 	lds	r24, 0x0074
+ 1c8:	87 ff       	sbrs	r24, 7
+ 1ca:	fc cf       	rjmp	.-8      	; 0x1c4 <I2C_RcvNAckDat+0x8>
+	if( I2CChkAck()!=I2C_MR_DATA_NACK )
+ 1cc:	80 91 71 00 	lds	r24, 0x0071
+ 1d0:	88 7f       	andi	r24, 0xF8	; 248
+ 1d2:	88 35       	cpi	r24, 0x58	; 88
+ 1d4:	11 f0       	breq	.+4      	; 0x1da <I2C_RcvNAckDat+0x1e>
+ 1d6:	80 e0       	ldi	r24, 0x00	; 0
+ 1d8:	08 95       	ret
+		return I2C_ERR;
+	*pRdDat=TWDR;
+ 1da:	80 91 73 00 	lds	r24, 0x0073
+ 1de:	80 83       	st	Z, r24
+ 1e0:	81 e0       	ldi	r24, 0x01	; 1
+	return I2C_CRR;
+}
+ 1e2:	08 95       	ret
+
+000001e4 <I2C_RcvAckDat>:
+提示说明：
+输    入：
+返    回：
+--------------------------------------------------------------------*/
+uint8_t I2C_RcvAckDat(uint8_t *pRdDat)	
+{
+ 1e4:	fc 01       	movw	r30, r24
+	I2CRcvAckByte();					
+ 1e6:	84 ec       	ldi	r24, 0xC4	; 196
+ 1e8:	80 93 74 00 	sts	0x0074, r24
+	I2CWaitAck();
+ 1ec:	80 91 74 00 	lds	r24, 0x0074
+ 1f0:	87 ff       	sbrs	r24, 7
+ 1f2:	fc cf       	rjmp	.-8      	; 0x1ec <I2C_RcvAckDat+0x8>
+	if( I2CChkAck()!=I2C_MR_DATA_ACK )
+ 1f4:	80 91 71 00 	lds	r24, 0x0071
+ 1f8:	88 7f       	andi	r24, 0xF8	; 248
+ 1fa:	80 35       	cpi	r24, 0x50	; 80
+ 1fc:	11 f0       	breq	.+4      	; 0x202 <I2C_RcvAckDat+0x1e>
+ 1fe:	80 e0       	ldi	r24, 0x00	; 0
+ 200:	08 95       	ret
+		return I2C_ERR;
+	*pRdDat=TWDR;
+ 202:	80 91 73 00 	lds	r24, 0x0073
+ 206:	80 83       	st	Z, r24
+ 208:	81 e0       	ldi	r24, 0x01	; 1
+	return I2C_CRR;
+}
+ 20a:	08 95       	ret
+
+0000020c <I2C_Write>:
+		 wordAdr: word address 字地址
+		 dat: data 数据
+返    回：
+--------------------------------------------------------------------*/
+uint8_t I2C_Write(uint16_t wrDAdr,uint8_t wordAdr,uint8_t dat)
+{
+ 20c:	0f 93       	push	r16
+ 20e:	1f 93       	push	r17
+ 210:	cf 93       	push	r28
+ 212:	df 93       	push	r29
+ 214:	ec 01       	movw	r28, r24
+ 216:	16 2f       	mov	r17, r22
+ 218:	04 2f       	mov	r16, r20
+	if( I2C_Start()==I2C_ERR )
+ 21a:	0e 94 6e 00 	call	0xdc	; 0xdc <I2C_Start>
+ 21e:	88 23       	and	r24, r24
+ 220:	a1 f0       	breq	.+40     	; 0x24a <I2C_Write+0x3e>
+		return I2C_ERR;
+
+	if( I2C_SendWrDAdr_(wrDAdr)==I2C_ERR )
+ 222:	ce 01       	movw	r24, r28
+ 224:	0e 94 a0 00 	call	0x140	; 0x140 <I2C_SendWrDAdr_>
+ 228:	88 23       	and	r24, r24
+ 22a:	79 f0       	breq	.+30     	; 0x24a <I2C_Write+0x3e>
+		return I2C_ERR;
+
+	if( I2C_SendDat(wordAdr)==I2C_ERR )
+ 22c:	81 2f       	mov	r24, r17
+ 22e:	0e 94 cc 00 	call	0x198	; 0x198 <I2C_SendDat>
+ 232:	88 23       	and	r24, r24
+ 234:	51 f0       	breq	.+20     	; 0x24a <I2C_Write+0x3e>
+		return I2C_ERR;
+
+	if( I2C_SendDat(dat)==I2C_ERR )
+ 236:	80 2f       	mov	r24, r16
+ 238:	0e 94 cc 00 	call	0x198	; 0x198 <I2C_SendDat>
+ 23c:	88 23       	and	r24, r24
+ 23e:	29 f0       	breq	.+10     	; 0x24a <I2C_Write+0x3e>
+		return I2C_ERR;
+
+	I2C_Stop();
+ 240:	84 e9       	ldi	r24, 0x94	; 148
+ 242:	80 93 74 00 	sts	0x0074, r24
+ 246:	81 e0       	ldi	r24, 0x01	; 1
+ 248:	01 c0       	rjmp	.+2      	; 0x24c <I2C_Write+0x40>
+
+	return I2C_CRR;
+ 24a:	80 e0       	ldi	r24, 0x00	; 0
+}
+ 24c:	df 91       	pop	r29
+ 24e:	cf 91       	pop	r28
+ 250:	1f 91       	pop	r17
+ 252:	0f 91       	pop	r16
+ 254:	08 95       	ret
+
+00000256 <I2C_Read>:
+		 *pRdDat: p->read data 读取数据指针
+返    回：
+--------------------------------------------------------------------*/
+uint8_t I2C_Read(uint16_t wrDAdr,uint8_t wordAdr,
+			  uint8_t rdDAdr,uint8_t *pRdDat)
+{
+ 256:	ef 92       	push	r14
+ 258:	ff 92       	push	r15
+ 25a:	0f 93       	push	r16
+ 25c:	1f 93       	push	r17
+ 25e:	cf 93       	push	r28
+ 260:	df 93       	push	r29
+ 262:	ec 01       	movw	r28, r24
+ 264:	f6 2e       	mov	r15, r22
+ 266:	e4 2e       	mov	r14, r20
+ 268:	89 01       	movw	r16, r18
+	if( I2C_Start()==I2C_ERR )
+ 26a:	0e 94 6e 00 	call	0xdc	; 0xdc <I2C_Start>
+ 26e:	88 23       	and	r24, r24
+ 270:	e9 f0       	breq	.+58     	; 0x2ac <I2C_Read+0x56>
+		return I2C_ERR;
+
+	if( I2C_SendWrDAdr_(wrDAdr)==I2C_ERR )
+ 272:	ce 01       	movw	r24, r28
+ 274:	0e 94 a0 00 	call	0x140	; 0x140 <I2C_SendWrDAdr_>
+ 278:	88 23       	and	r24, r24
+ 27a:	c1 f0       	breq	.+48     	; 0x2ac <I2C_Read+0x56>
+		return I2C_ERR;
+
+	if( I2C_SendDat(wordAdr)==I2C_ERR )
+ 27c:	8f 2d       	mov	r24, r15
+ 27e:	0e 94 cc 00 	call	0x198	; 0x198 <I2C_SendDat>
+ 282:	88 23       	and	r24, r24
+ 284:	99 f0       	breq	.+38     	; 0x2ac <I2C_Read+0x56>
+		return I2C_ERR;
+
+	if( I2C_Restart()==I2C_ERR )
+ 286:	0e 94 7e 00 	call	0xfc	; 0xfc <I2C_Restart>
+ 28a:	88 23       	and	r24, r24
+ 28c:	79 f0       	breq	.+30     	; 0x2ac <I2C_Read+0x56>
+		return I2C_ERR;
+
+	if( I2C_SendRdDAdr(rdDAdr)==I2C_ERR )
+ 28e:	8e 2d       	mov	r24, r14
+ 290:	0e 94 b5 00 	call	0x16a	; 0x16a <I2C_SendRdDAdr>
+ 294:	88 23       	and	r24, r24
+ 296:	51 f0       	breq	.+20     	; 0x2ac <I2C_Read+0x56>
+		return I2C_ERR;
+
+	if( I2C_RcvNAckDat(pRdDat)==I2C_ERR )
+ 298:	c8 01       	movw	r24, r16
+ 29a:	0e 94 de 00 	call	0x1bc	; 0x1bc <I2C_RcvNAckDat>
+ 29e:	88 23       	and	r24, r24
+ 2a0:	29 f0       	breq	.+10     	; 0x2ac <I2C_Read+0x56>
+		return I2C_ERR;
+
+	I2C_Stop();
+ 2a2:	84 e9       	ldi	r24, 0x94	; 148
+ 2a4:	80 93 74 00 	sts	0x0074, r24
+ 2a8:	81 e0       	ldi	r24, 0x01	; 1
+ 2aa:	01 c0       	rjmp	.+2      	; 0x2ae <I2C_Read+0x58>
+
+	return I2C_CRR;
+ 2ac:	80 e0       	ldi	r24, 0x00	; 0
+}
+ 2ae:	df 91       	pop	r29
+ 2b0:	cf 91       	pop	r28
+ 2b2:	1f 91       	pop	r17
+ 2b4:	0f 91       	pop	r16
+ 2b6:	ff 90       	pop	r15
+ 2b8:	ef 90       	pop	r14
+ 2ba:	08 95       	ret
+
+000002bc <I2C_Read_>:
+		 num: number 读取数据个数
+返    回：
+--------------------------------------------------------------------*/
+uint8_t I2C_Read_(uint16_t wrDAdr,uint8_t wordAdr,
+			   uint8_t rdDAdr,uint8_t *pRdDat,uint8_t num)
+{
+ 2bc:	cf 92       	push	r12
+ 2be:	df 92       	push	r13
+ 2c0:	ff 92       	push	r15
+ 2c2:	0f 93       	push	r16
+ 2c4:	1f 93       	push	r17
+ 2c6:	cf 93       	push	r28
+ 2c8:	df 93       	push	r29
+ 2ca:	ec 01       	movw	r28, r24
+ 2cc:	16 2f       	mov	r17, r22
+ 2ce:	f4 2e       	mov	r15, r20
+ 2d0:	69 01       	movw	r12, r18
+ 	uint8_t i;
+	
+	if( I2C_Start()==I2C_ERR )
+ 2d2:	0e 94 6e 00 	call	0xdc	; 0xdc <I2C_Start>
+ 2d6:	88 23       	and	r24, r24
+ 2d8:	81 f1       	breq	.+96     	; 0x33a <I2C_Read_+0x7e>
+		return I2C_ERR;
+
+	if( I2C_SendWrDAdr_(wrDAdr)==I2C_ERR )
+ 2da:	ce 01       	movw	r24, r28
+ 2dc:	0e 94 a0 00 	call	0x140	; 0x140 <I2C_SendWrDAdr_>
+ 2e0:	88 23       	and	r24, r24
+ 2e2:	59 f1       	breq	.+86     	; 0x33a <I2C_Read_+0x7e>
+		return I2C_ERR;
+
+	if( I2C_SendDat(wordAdr)==I2C_ERR )
+ 2e4:	81 2f       	mov	r24, r17
+ 2e6:	0e 94 cc 00 	call	0x198	; 0x198 <I2C_SendDat>
+ 2ea:	88 23       	and	r24, r24
+ 2ec:	31 f1       	breq	.+76     	; 0x33a <I2C_Read_+0x7e>
+		return I2C_ERR;
+
+	if( I2C_Restart()==I2C_ERR )
+ 2ee:	0e 94 7e 00 	call	0xfc	; 0xfc <I2C_Restart>
+ 2f2:	88 23       	and	r24, r24
+ 2f4:	11 f1       	breq	.+68     	; 0x33a <I2C_Read_+0x7e>
+		return I2C_ERR;
+
+	if( I2C_SendRdDAdr(rdDAdr)==I2C_ERR )
+ 2f6:	8f 2d       	mov	r24, r15
+ 2f8:	0e 94 b5 00 	call	0x16a	; 0x16a <I2C_SendRdDAdr>
+ 2fc:	88 23       	and	r24, r24
+ 2fe:	e9 f0       	breq	.+58     	; 0x33a <I2C_Read_+0x7e>
+ 300:	ff 24       	eor	r15, r15
+		return I2C_ERR;
+
+	for(i=0;i<num-1;i++)
+ 302:	10 e0       	ldi	r17, 0x00	; 0
+ 304:	01 50       	subi	r16, 0x01	; 1
+ 306:	10 40       	sbci	r17, 0x00	; 0
+ 308:	06 c0       	rjmp	.+12     	; 0x316 <I2C_Read_+0x5a>
+		if( I2C_RcvAckDat(pRdDat+i)==I2C_ERR )
+ 30a:	c9 01       	movw	r24, r18
+ 30c:	0e 94 f2 00 	call	0x1e4	; 0x1e4 <I2C_RcvAckDat>
+ 310:	88 23       	and	r24, r24
+ 312:	99 f0       	breq	.+38     	; 0x33a <I2C_Read_+0x7e>
+		return I2C_ERR;
+
+	if( I2C_SendRdDAdr(rdDAdr)==I2C_ERR )
+		return I2C_ERR;
+
+	for(i=0;i<num-1;i++)
+ 314:	f3 94       	inc	r15
+ 316:	8f 2d       	mov	r24, r15
+ 318:	90 e0       	ldi	r25, 0x00	; 0
+ 31a:	96 01       	movw	r18, r12
+ 31c:	28 0f       	add	r18, r24
+ 31e:	39 1f       	adc	r19, r25
+ 320:	80 17       	cp	r24, r16
+ 322:	91 07       	cpc	r25, r17
+ 324:	94 f3       	brlt	.-28     	; 0x30a <I2C_Read_+0x4e>
+		if( I2C_RcvAckDat(pRdDat+i)==I2C_ERR )
+			return I2C_ERR;
+	
+	if( I2C_RcvNAckDat(pRdDat+i)==I2C_ERR )
+ 326:	c9 01       	movw	r24, r18
+ 328:	0e 94 de 00 	call	0x1bc	; 0x1bc <I2C_RcvNAckDat>
+ 32c:	88 23       	and	r24, r24
+ 32e:	29 f0       	breq	.+10     	; 0x33a <I2C_Read_+0x7e>
+			return I2C_ERR;
+
+	I2C_Stop();
+ 330:	84 e9       	ldi	r24, 0x94	; 148
+ 332:	80 93 74 00 	sts	0x0074, r24
+ 336:	81 e0       	ldi	r24, 0x01	; 1
+ 338:	01 c0       	rjmp	.+2      	; 0x33c <I2C_Read_+0x80>
+	
+	return I2C_CRR;
+ 33a:	80 e0       	ldi	r24, 0x00	; 0
+}
+ 33c:	df 91       	pop	r29
+ 33e:	cf 91       	pop	r28
+ 340:	1f 91       	pop	r17
+ 342:	0f 91       	pop	r16
+ 344:	ff 90       	pop	r15
+ 346:	df 90       	pop	r13
+ 348:	cf 90       	pop	r12
+ 34a:	08 95       	ret
+
+0000034c <spiSendChar>:
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void spiSendChar(uint8_t send_char)
+{
+	SPDR = send_char;
+ 34c:	8f b9       	out	0x0f, r24	; 15
+	while (!(SPSR & (1<<SPIF)));
+ 34e:	77 9b       	sbis	0x0e, 7	; 14
+ 350:	fe cf       	rjmp	.-4      	; 0x34e <spiSendChar+0x2>
+}
+ 352:	08 95       	ret
+
+00000354 <sendCodeST7920>:
+*	给LCD控制芯片ST7920发送指令的函数
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void sendCodeST7920(uint8_t code)
+{
+ 354:	98 2f       	mov	r25, r24
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void spiSendChar(uint8_t send_char)
+{
+	SPDR = send_char;
+ 356:	88 ef       	ldi	r24, 0xF8	; 248
+ 358:	8f b9       	out	0x0f, r24	; 15
+	while (!(SPSR & (1<<SPIF)));
+ 35a:	77 9b       	sbis	0x0e, 7	; 14
+ 35c:	fe cf       	rjmp	.-4      	; 0x35a <sendCodeST7920+0x6>
+*-------------------------------------------------------------------------------------------------------
+*/
+void sendCodeST7920(uint8_t code)
+{
+	spiSendChar(0xF8);
+	spiSendChar(code & 0xF0);
+ 35e:	89 2f       	mov	r24, r25
+ 360:	80 7f       	andi	r24, 0xF0	; 240
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void spiSendChar(uint8_t send_char)
+{
+	SPDR = send_char;
+ 362:	8f b9       	out	0x0f, r24	; 15
+	while (!(SPSR & (1<<SPIF)));
+ 364:	77 9b       	sbis	0x0e, 7	; 14
+ 366:	fe cf       	rjmp	.-4      	; 0x364 <sendCodeST7920+0x10>
+*/
+void sendCodeST7920(uint8_t code)
+{
+	spiSendChar(0xF8);
+	spiSendChar(code & 0xF0);
+	spiSendChar((code<<4));
+ 368:	92 95       	swap	r25
+ 36a:	90 7f       	andi	r25, 0xF0	; 240
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void spiSendChar(uint8_t send_char)
+{
+	SPDR = send_char;
+ 36c:	9f b9       	out	0x0f, r25	; 15
+	while (!(SPSR & (1<<SPIF)));
+ 36e:	77 9b       	sbis	0x0e, 7	; 14
+ 370:	fe cf       	rjmp	.-4      	; 0x36e <sendCodeST7920+0x1a>
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+ 372:	88 eb       	ldi	r24, 0xB8	; 184
+ 374:	8a 95       	dec	r24
+ 376:	f1 f7       	brne	.-4      	; 0x374 <sendCodeST7920+0x20>
+{
+	spiSendChar(0xF8);
+	spiSendChar(code & 0xF0);
+	spiSendChar((code<<4));
+	LCD_DELAY();
+}
+ 378:	08 95       	ret
+
+0000037a <sendDataST7920>:
+*	给LCD控制芯片ST7920发送数据的函数
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void sendDataST7920(uint8_t data)
+{
+ 37a:	98 2f       	mov	r25, r24
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void spiSendChar(uint8_t send_char)
+{
+	SPDR = send_char;
+ 37c:	8a ef       	ldi	r24, 0xFA	; 250
+ 37e:	8f b9       	out	0x0f, r24	; 15
+	while (!(SPSR & (1<<SPIF)));
+ 380:	77 9b       	sbis	0x0e, 7	; 14
+ 382:	fe cf       	rjmp	.-4      	; 0x380 <sendDataST7920+0x6>
+*-------------------------------------------------------------------------------------------------------
+*/
+void sendDataST7920(uint8_t data)
+{
+	spiSendChar(0xFA);
+	spiSendChar(data & 0xF0);
+ 384:	89 2f       	mov	r24, r25
+ 386:	80 7f       	andi	r24, 0xF0	; 240
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void spiSendChar(uint8_t send_char)
+{
+	SPDR = send_char;
+ 388:	8f b9       	out	0x0f, r24	; 15
+	while (!(SPSR & (1<<SPIF)));
+ 38a:	77 9b       	sbis	0x0e, 7	; 14
+ 38c:	fe cf       	rjmp	.-4      	; 0x38a <sendDataST7920+0x10>
+*/
+void sendDataST7920(uint8_t data)
+{
+	spiSendChar(0xFA);
+	spiSendChar(data & 0xF0);
+	spiSendChar((data<<4));
+ 38e:	92 95       	swap	r25
+ 390:	90 7f       	andi	r25, 0xF0	; 240
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void spiSendChar(uint8_t send_char)
+{
+	SPDR = send_char;
+ 392:	9f b9       	out	0x0f, r25	; 15
+	while (!(SPSR & (1<<SPIF)));
+ 394:	77 9b       	sbis	0x0e, 7	; 14
+ 396:	fe cf       	rjmp	.-4      	; 0x394 <sendDataST7920+0x1a>
+ 398:	88 eb       	ldi	r24, 0xB8	; 184
+ 39a:	8a 95       	dec	r24
+ 39c:	f1 f7       	brne	.-4      	; 0x39a <sendDataST7920+0x20>
+{
+	spiSendChar(0xFA);
+	spiSendChar(data & 0xF0);
+	spiSendChar((data<<4));
+	LCD_DELAY();
+}
+ 39e:	08 95       	ret
+
+000003a0 <refreshLCD>:
+*	*lcd_stack指向用于刷新LCD的数据栈,需64byte容量
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void refreshLCD(const uint8_t *lcd_stack)
+{
+ 3a0:	cf 92       	push	r12
+ 3a2:	df 92       	push	r13
+ 3a4:	ef 92       	push	r14
+ 3a6:	ff 92       	push	r15
+ 3a8:	0f 93       	push	r16
+ 3aa:	1f 93       	push	r17
+ 3ac:	cf 93       	push	r28
+ 3ae:	df 93       	push	r29
+ 3b0:	6c 01       	movw	r12, r24
+	uint8_t addr;
+	sendCodeST7920(0x02);	/*地址归位*/
+ 3b2:	82 e0       	ldi	r24, 0x02	; 2
+ 3b4:	0e 94 aa 01 	call	0x354	; 0x354 <sendCodeST7920>
+ 3b8:	c0 e0       	ldi	r28, 0x00	; 0
+ 3ba:	d0 e0       	ldi	r29, 0x00	; 0
+	for(addr=0;addr < 16;addr++)
+	{
+		sendDataST7920(*(lcd_stack + addr));
+ 3bc:	f6 01       	movw	r30, r12
+ 3be:	ec 0f       	add	r30, r28
+ 3c0:	fd 1f       	adc	r31, r29
+ 3c2:	80 81       	ld	r24, Z
+ 3c4:	0e 94 bd 01 	call	0x37a	; 0x37a <sendDataST7920>
+ 3c8:	21 96       	adiw	r28, 0x01	; 1
+*/
+void refreshLCD(const uint8_t *lcd_stack)
+{
+	uint8_t addr;
+	sendCodeST7920(0x02);	/*地址归位*/
+	for(addr=0;addr < 16;addr++)
+ 3ca:	c0 31       	cpi	r28, 0x10	; 16
+ 3cc:	d1 05       	cpc	r29, r1
+ 3ce:	b1 f7       	brne	.-20     	; 0x3bc <refreshLCD+0x1c>
+ 3d0:	76 01       	movw	r14, r12
+ 3d2:	e6 01       	movw	r28, r12
+ 3d4:	00 e2       	ldi	r16, 0x20	; 32
+	{
+		sendDataST7920(*(lcd_stack + addr));
+	}
+	for(addr=32;addr < 48;addr++)
+	{
+		sendDataST7920(*(lcd_stack + addr));
+ 3d6:	88 a1       	ldd	r24, Y+32	; 0x20
+ 3d8:	0e 94 bd 01 	call	0x37a	; 0x37a <sendDataST7920>
+	sendCodeST7920(0x02);	/*地址归位*/
+	for(addr=0;addr < 16;addr++)
+	{
+		sendDataST7920(*(lcd_stack + addr));
+	}
+	for(addr=32;addr < 48;addr++)
+ 3dc:	0f 5f       	subi	r16, 0xFF	; 255
+ 3de:	21 96       	adiw	r28, 0x01	; 1
+ 3e0:	00 33       	cpi	r16, 0x30	; 48
+ 3e2:	c9 f7       	brne	.-14     	; 0x3d6 <refreshLCD+0x36>
+ 3e4:	10 e1       	ldi	r17, 0x10	; 16
+	{
+		sendDataST7920(*(lcd_stack + addr));
+	}
+	for(addr=16;addr < 32;addr++)
+	{
+		sendDataST7920(*(lcd_stack + addr));
+ 3e6:	f7 01       	movw	r30, r14
+ 3e8:	80 89       	ldd	r24, Z+16	; 0x10
+ 3ea:	0e 94 bd 01 	call	0x37a	; 0x37a <sendDataST7920>
+	}
+	for(addr=32;addr < 48;addr++)
+	{
+		sendDataST7920(*(lcd_stack + addr));
+	}
+	for(addr=16;addr < 32;addr++)
+ 3ee:	1f 5f       	subi	r17, 0xFF	; 255
+ 3f0:	08 94       	sec
+ 3f2:	e1 1c       	adc	r14, r1
+ 3f4:	f1 1c       	adc	r15, r1
+ 3f6:	10 32       	cpi	r17, 0x20	; 32
+ 3f8:	b1 f7       	brne	.-20     	; 0x3e6 <refreshLCD+0x46>
+ 3fa:	e6 01       	movw	r28, r12
+ 3fc:	e0 96       	adiw	r28, 0x30	; 48
+		sendDataST7920(*(lcd_stack + addr));
+	}
+	
+	for(addr=48;addr < 64;addr++)
+	{
+		sendDataST7920(*(lcd_stack + addr));
+ 3fe:	89 91       	ld	r24, Y+
+ 400:	0e 94 bd 01 	call	0x37a	; 0x37a <sendDataST7920>
+	for(addr=16;addr < 32;addr++)
+	{
+		sendDataST7920(*(lcd_stack + addr));
+	}
+	
+	for(addr=48;addr < 64;addr++)
+ 404:	0f 5f       	subi	r16, 0xFF	; 255
+ 406:	00 34       	cpi	r16, 0x40	; 64
+ 408:	d1 f7       	brne	.-12     	; 0x3fe <refreshLCD+0x5e>
+	{
+		sendDataST7920(*(lcd_stack + addr));
+	}
+}
+ 40a:	df 91       	pop	r29
+ 40c:	cf 91       	pop	r28
+ 40e:	1f 91       	pop	r17
+ 410:	0f 91       	pop	r16
+ 412:	ff 90       	pop	r15
+ 414:	ef 90       	pop	r14
+ 416:	df 90       	pop	r13
+ 418:	cf 90       	pop	r12
+ 41a:	08 95       	ret
+
+0000041c <decToAscii>:
+*	width是转换成ASCII后的宽度(高位填充'0')
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void decToAscii(uint8_t* str,uint16_t dec,uint8_t width)
+{
+ 41c:	1f 93       	push	r17
+ 41e:	fc 01       	movw	r30, r24
+ 420:	9b 01       	movw	r18, r22
+			case 1:
+			{
+				*str = (dec+'0');
+				break;
+			}
+			default: *str = '0';
+ 422:	10 e3       	ldi	r17, 0x30	; 48
+ 424:	43 c0       	rjmp	.+134    	; 0x4ac <decToAscii+0x90>
+*/
+void decToAscii(uint8_t* str,uint16_t dec,uint8_t width)
+{
+	while(width)
+	{
+		switch(width)
+ 426:	43 30       	cpi	r20, 0x03	; 3
+ 428:	21 f1       	breq	.+72     	; 0x472 <decToAscii+0x56>
+ 42a:	44 30       	cpi	r20, 0x04	; 4
+ 42c:	28 f4       	brcc	.+10     	; 0x438 <decToAscii+0x1c>
+ 42e:	41 30       	cpi	r20, 0x01	; 1
+ 430:	b1 f1       	breq	.+108    	; 0x49e <decToAscii+0x82>
+ 432:	42 30       	cpi	r20, 0x02	; 2
+ 434:	c1 f5       	brne	.+112    	; 0x4a6 <decToAscii+0x8a>
+ 436:	28 c0       	rjmp	.+80     	; 0x488 <decToAscii+0x6c>
+ 438:	44 30       	cpi	r20, 0x04	; 4
+ 43a:	69 f0       	breq	.+26     	; 0x456 <decToAscii+0x3a>
+ 43c:	45 30       	cpi	r20, 0x05	; 5
+ 43e:	99 f5       	brne	.+102    	; 0x4a6 <decToAscii+0x8a>
+		{
+			case 5:
+			{
+				*str = (dec/10000+'0');
+ 440:	c9 01       	movw	r24, r18
+ 442:	60 e1       	ldi	r22, 0x10	; 16
+ 444:	77 e2       	ldi	r23, 0x27	; 39
+ 446:	0e 94 26 04 	call	0x84c	; 0x84c <__udivmodhi4>
+ 44a:	60 5d       	subi	r22, 0xD0	; 208
+ 44c:	60 83       	st	Z, r22
+				dec%=10000;
+ 44e:	c9 01       	movw	r24, r18
+ 450:	60 e1       	ldi	r22, 0x10	; 16
+ 452:	77 e2       	ldi	r23, 0x27	; 39
+ 454:	0a c0       	rjmp	.+20     	; 0x46a <decToAscii+0x4e>
+				break;
+			}			
+			case 4:
+			{
+				*str = (dec/1000+'0');
+ 456:	c9 01       	movw	r24, r18
+ 458:	68 ee       	ldi	r22, 0xE8	; 232
+ 45a:	73 e0       	ldi	r23, 0x03	; 3
+ 45c:	0e 94 26 04 	call	0x84c	; 0x84c <__udivmodhi4>
+ 460:	60 5d       	subi	r22, 0xD0	; 208
+ 462:	60 83       	st	Z, r22
+				dec%=1000;
+ 464:	c9 01       	movw	r24, r18
+ 466:	68 ee       	ldi	r22, 0xE8	; 232
+ 468:	73 e0       	ldi	r23, 0x03	; 3
+ 46a:	0e 94 26 04 	call	0x84c	; 0x84c <__udivmodhi4>
+ 46e:	9c 01       	movw	r18, r24
+ 470:	1b c0       	rjmp	.+54     	; 0x4a8 <decToAscii+0x8c>
+				break;
+			}
+			case 3:
+			{
+				*str = (dec/100+'0');
+ 472:	c9 01       	movw	r24, r18
+ 474:	64 e6       	ldi	r22, 0x64	; 100
+ 476:	70 e0       	ldi	r23, 0x00	; 0
+ 478:	0e 94 26 04 	call	0x84c	; 0x84c <__udivmodhi4>
+ 47c:	60 5d       	subi	r22, 0xD0	; 208
+ 47e:	60 83       	st	Z, r22
+				dec%=100;
+ 480:	c9 01       	movw	r24, r18
+ 482:	64 e6       	ldi	r22, 0x64	; 100
+ 484:	70 e0       	ldi	r23, 0x00	; 0
+ 486:	f1 cf       	rjmp	.-30     	; 0x46a <decToAscii+0x4e>
+				break;
+			}
+			case 2:
+			{
+				*str = (dec/10+'0');
+ 488:	c9 01       	movw	r24, r18
+ 48a:	6a e0       	ldi	r22, 0x0A	; 10
+ 48c:	70 e0       	ldi	r23, 0x00	; 0
+ 48e:	0e 94 26 04 	call	0x84c	; 0x84c <__udivmodhi4>
+ 492:	60 5d       	subi	r22, 0xD0	; 208
+ 494:	60 83       	st	Z, r22
+				dec%=10;
+ 496:	c9 01       	movw	r24, r18
+ 498:	6a e0       	ldi	r22, 0x0A	; 10
+ 49a:	70 e0       	ldi	r23, 0x00	; 0
+ 49c:	e6 cf       	rjmp	.-52     	; 0x46a <decToAscii+0x4e>
+				break;
+			}
+			case 1:
+			{
+				*str = (dec+'0');
+ 49e:	20 5d       	subi	r18, 0xD0	; 208
+ 4a0:	20 83       	st	Z, r18
+ 4a2:	20 53       	subi	r18, 0x30	; 48
+ 4a4:	01 c0       	rjmp	.+2      	; 0x4a8 <decToAscii+0x8c>
+				break;
+			}
+			default: *str = '0';
+ 4a6:	10 83       	st	Z, r17
+		}
+		width--;
+ 4a8:	41 50       	subi	r20, 0x01	; 1
+		str++;
+ 4aa:	31 96       	adiw	r30, 0x01	; 1
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void decToAscii(uint8_t* str,uint16_t dec,uint8_t width)
+{
+	while(width)
+ 4ac:	44 23       	and	r20, r20
+ 4ae:	09 f0       	breq	.+2      	; 0x4b2 <decToAscii+0x96>
+ 4b0:	ba cf       	rjmp	.-140    	; 0x426 <decToAscii+0xa>
+			default: *str = '0';
+		}
+		width--;
+		str++;
+	}
+}
+ 4b2:	1f 91       	pop	r17
+ 4b4:	08 95       	ret
+
+000004b6 <hexToAscii>:
+*	width是转换成ASCII后的宽度(高位填充'0')
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void hexToAscii(uint8_t* str,uint16_t hex,uint8_t width)
+{
+ 4b6:	cf 92       	push	r12
+ 4b8:	df 92       	push	r13
+ 4ba:	ef 92       	push	r14
+ 4bc:	ff 92       	push	r15
+ 4be:	0f 93       	push	r16
+ 4c0:	1f 93       	push	r17
+ 4c2:	cf 93       	push	r28
+ 4c4:	df 93       	push	r29
+ 4c6:	fc 01       	movw	r30, r24
+	{
+		switch(width)
+		{		
+			case 4:
+			{
+				tmp=(hex>>12);
+ 4c8:	eb 01       	movw	r28, r22
+ 4ca:	cd 2f       	mov	r28, r29
+ 4cc:	dd 27       	eor	r29, r29
+ 4ce:	c2 95       	swap	r28
+ 4d0:	cf 70       	andi	r28, 0x0F	; 15
+				if(tmp>9) *str = tmp+('A'-10);
+ 4d2:	27 e3       	ldi	r18, 0x37	; 55
+ 4d4:	d2 2e       	mov	r13, r18
+ 4d6:	dc 0e       	add	r13, r28
+				else *str = tmp+'0';
+ 4d8:	90 e3       	ldi	r25, 0x30	; 48
+ 4da:	e9 2e       	mov	r14, r25
+ 4dc:	ec 0e       	add	r14, r28
+				break;
+			}
+			case 3:
+			{
+				tmp=(hex>>8)&0x000F;
+ 4de:	a7 2f       	mov	r26, r23
+ 4e0:	bb 27       	eor	r27, r27
+ 4e2:	af 70       	andi	r26, 0x0F	; 15
+ 4e4:	b0 70       	andi	r27, 0x00	; 0
+				if(tmp>9) *str = tmp+('A'-10);
+ 4e6:	17 e3       	ldi	r17, 0x37	; 55
+ 4e8:	f1 2e       	mov	r15, r17
+ 4ea:	fa 0e       	add	r15, r26
+				else *str = tmp+'0';
+ 4ec:	0a 2f       	mov	r16, r26
+ 4ee:	00 5d       	subi	r16, 0xD0	; 208
+				break;
+			}
+			case 2:
+			{
+				tmp=(hex>>4)&0x000F;
+ 4f0:	9b 01       	movw	r18, r22
+ 4f2:	54 e0       	ldi	r21, 0x04	; 4
+ 4f4:	36 95       	lsr	r19
+ 4f6:	27 95       	ror	r18
+ 4f8:	5a 95       	dec	r21
+ 4fa:	e1 f7       	brne	.-8      	; 0x4f4 <hexToAscii+0x3e>
+ 4fc:	2f 70       	andi	r18, 0x0F	; 15
+ 4fe:	30 70       	andi	r19, 0x00	; 0
+				if(tmp>9) *str = tmp+('A'-10);
+ 500:	82 2f       	mov	r24, r18
+ 502:	12 2f       	mov	r17, r18
+ 504:	19 5c       	subi	r17, 0xC9	; 201
+				else *str = tmp+'0';
+ 506:	80 5d       	subi	r24, 0xD0	; 208
+				tmp=hex&0x000F;
+				if(tmp>9) *str = tmp+('A'-10);
+				else *str = tmp+'0';
+				break;
+			}
+			default: *str = '0';
+ 508:	90 e3       	ldi	r25, 0x30	; 48
+ 50a:	c9 2e       	mov	r12, r25
+				else *str = tmp+'0';
+				break;
+			}
+			case 1:
+			{
+				tmp=hex&0x000F;
+ 50c:	6f 70       	andi	r22, 0x0F	; 15
+ 50e:	70 70       	andi	r23, 0x00	; 0
+				if(tmp>9) *str = tmp+('A'-10);
+				else *str = tmp+'0';
+ 510:	56 2f       	mov	r21, r22
+ 512:	50 5d       	subi	r21, 0xD0	; 208
+				break;
+			}
+			case 1:
+			{
+				tmp=hex&0x000F;
+				if(tmp>9) *str = tmp+('A'-10);
+ 514:	96 2f       	mov	r25, r22
+ 516:	99 5c       	subi	r25, 0xC9	; 201
+ 518:	2a c0       	rjmp	.+84     	; 0x56e <hexToAscii+0xb8>
+void hexToAscii(uint8_t* str,uint16_t hex,uint8_t width)
+{
+	uint16_t tmp;
+	while(width)
+	{
+		switch(width)
+ 51a:	42 30       	cpi	r20, 0x02	; 2
+ 51c:	b9 f0       	breq	.+46     	; 0x54c <hexToAscii+0x96>
+ 51e:	43 30       	cpi	r20, 0x03	; 3
+ 520:	18 f4       	brcc	.+6      	; 0x528 <hexToAscii+0x72>
+ 522:	41 30       	cpi	r20, 0x01	; 1
+ 524:	09 f5       	brne	.+66     	; 0x568 <hexToAscii+0xb2>
+ 526:	19 c0       	rjmp	.+50     	; 0x55a <hexToAscii+0xa4>
+ 528:	43 30       	cpi	r20, 0x03	; 3
+ 52a:	49 f0       	breq	.+18     	; 0x53e <hexToAscii+0x88>
+ 52c:	44 30       	cpi	r20, 0x04	; 4
+ 52e:	e1 f4       	brne	.+56     	; 0x568 <hexToAscii+0xb2>
+		{		
+			case 4:
+			{
+				tmp=(hex>>12);
+				if(tmp>9) *str = tmp+('A'-10);
+ 530:	ca 30       	cpi	r28, 0x0A	; 10
+ 532:	d1 05       	cpc	r29, r1
+ 534:	10 f0       	brcs	.+4      	; 0x53a <hexToAscii+0x84>
+ 536:	d0 82       	st	Z, r13
+ 538:	18 c0       	rjmp	.+48     	; 0x56a <hexToAscii+0xb4>
+				else *str = tmp+'0';
+ 53a:	e0 82       	st	Z, r14
+ 53c:	16 c0       	rjmp	.+44     	; 0x56a <hexToAscii+0xb4>
+				break;
+			}
+			case 3:
+			{
+				tmp=(hex>>8)&0x000F;
+				if(tmp>9) *str = tmp+('A'-10);
+ 53e:	aa 30       	cpi	r26, 0x0A	; 10
+ 540:	b1 05       	cpc	r27, r1
+ 542:	10 f0       	brcs	.+4      	; 0x548 <hexToAscii+0x92>
+ 544:	f0 82       	st	Z, r15
+ 546:	11 c0       	rjmp	.+34     	; 0x56a <hexToAscii+0xb4>
+				else *str = tmp+'0';
+ 548:	00 83       	st	Z, r16
+ 54a:	0f c0       	rjmp	.+30     	; 0x56a <hexToAscii+0xb4>
+				break;
+			}
+			case 2:
+			{
+				tmp=(hex>>4)&0x000F;
+				if(tmp>9) *str = tmp+('A'-10);
+ 54c:	2a 30       	cpi	r18, 0x0A	; 10
+ 54e:	31 05       	cpc	r19, r1
+ 550:	10 f0       	brcs	.+4      	; 0x556 <hexToAscii+0xa0>
+ 552:	10 83       	st	Z, r17
+ 554:	0a c0       	rjmp	.+20     	; 0x56a <hexToAscii+0xb4>
+				else *str = tmp+'0';
+ 556:	80 83       	st	Z, r24
+ 558:	08 c0       	rjmp	.+16     	; 0x56a <hexToAscii+0xb4>
+				break;
+			}
+			case 1:
+			{
+				tmp=hex&0x000F;
+				if(tmp>9) *str = tmp+('A'-10);
+ 55a:	6a 30       	cpi	r22, 0x0A	; 10
+ 55c:	71 05       	cpc	r23, r1
+ 55e:	10 f0       	brcs	.+4      	; 0x564 <hexToAscii+0xae>
+ 560:	90 83       	st	Z, r25
+ 562:	03 c0       	rjmp	.+6      	; 0x56a <hexToAscii+0xb4>
+				else *str = tmp+'0';
+ 564:	50 83       	st	Z, r21
+ 566:	01 c0       	rjmp	.+2      	; 0x56a <hexToAscii+0xb4>
+				break;
+			}
+			default: *str = '0';
+ 568:	c0 82       	st	Z, r12
+		}
+		width--;
+ 56a:	41 50       	subi	r20, 0x01	; 1
+		str++;
+ 56c:	31 96       	adiw	r30, 0x01	; 1
+*-------------------------------------------------------------------------------------------------------
+*/
+void hexToAscii(uint8_t* str,uint16_t hex,uint8_t width)
+{
+	uint16_t tmp;
+	while(width)
+ 56e:	44 23       	and	r20, r20
+ 570:	a1 f6       	brne	.-88     	; 0x51a <hexToAscii+0x64>
+			default: *str = '0';
+		}
+		width--;
+		str++;
+	}
+}
+ 572:	df 91       	pop	r29
+ 574:	cf 91       	pop	r28
+ 576:	1f 91       	pop	r17
+ 578:	0f 91       	pop	r16
+ 57a:	ff 90       	pop	r15
+ 57c:	ef 90       	pop	r14
+ 57e:	df 90       	pop	r13
+ 580:	cf 90       	pop	r12
+ 582:	08 95       	ret
+
+00000584 <st7920LcdInit>:
+#define CLR_CS_LCD() cbi(PORTB,4)
+#define OUT_CS_LCD() sbi(DDRB,4)
+
+void st7920LcdInit(void)
+{
+DDRB|=0x07;
+ 584:	87 b3       	in	r24, 0x17	; 23
+ 586:	87 60       	ori	r24, 0x07	; 7
+ 588:	87 bb       	out	0x17, r24	; 23
+PORTB&=0xF8;
+ 58a:	88 b3       	in	r24, 0x18	; 24
+ 58c:	88 7f       	andi	r24, 0xF8	; 248
+ 58e:	88 bb       	out	0x18, r24	; 24
+// SPI Type: Master
+// SPI Clock Rate: 2*1843.200 kHz
+// SPI Clock Phase: Cycle Half
+// SPI Clock Polarity: Low
+// SPI Data Order: MSB First
+SPCR=0x50;
+ 590:	80 e5       	ldi	r24, 0x50	; 80
+ 592:	8d b9       	out	0x0d, r24	; 13
+SPSR=0x01;
+ 594:	81 e0       	ldi	r24, 0x01	; 1
+ 596:	8e b9       	out	0x0e, r24	; 14
+sendCodeST7920(0x0C);//整体显示
+ 598:	8c e0       	ldi	r24, 0x0C	; 12
+ 59a:	0e 94 aa 01 	call	0x354	; 0x354 <sendCodeST7920>
+sendCodeST7920(0x01);//清屏
+ 59e:	81 e0       	ldi	r24, 0x01	; 1
+ 5a0:	0e 94 aa 01 	call	0x354	; 0x354 <sendCodeST7920>
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+ 5a4:	86 e6       	ldi	r24, 0x66	; 102
+ 5a6:	9e e0       	ldi	r25, 0x0E	; 14
+ 5a8:	01 97       	sbiw	r24, 0x01	; 1
+ 5aa:	f1 f7       	brne	.-4      	; 0x5a8 <st7920LcdInit+0x24>
+_delay_ms(2);
+memset(lcd_buffer,' ',sizeof(lcd_buffer));
+ 5ac:	8c e2       	ldi	r24, 0x2C	; 44
+ 5ae:	91 e0       	ldi	r25, 0x01	; 1
+ 5b0:	60 e2       	ldi	r22, 0x20	; 32
+ 5b2:	70 e0       	ldi	r23, 0x00	; 0
+ 5b4:	40 e4       	ldi	r20, 0x40	; 64
+ 5b6:	50 e0       	ldi	r21, 0x00	; 0
+ 5b8:	0e 94 3a 04 	call	0x874	; 0x874 <memset>
+}
+ 5bc:	08 95       	ret
+
+000005be <showLine>:
+*	*str指向用于将要显示的内容
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void showLine(const uint8_t x,const uint8_t y,uint8_t* lcd_stack,char * str,...)
+{
+ 5be:	af 92       	push	r10
+ 5c0:	bf 92       	push	r11
+ 5c2:	cf 92       	push	r12
+ 5c4:	df 92       	push	r13
+ 5c6:	ef 92       	push	r14
+ 5c8:	ff 92       	push	r15
+ 5ca:	0f 93       	push	r16
+ 5cc:	df 93       	push	r29
+ 5ce:	cf 93       	push	r28
+ 5d0:	cd b7       	in	r28, 0x3d	; 61
+ 5d2:	de b7       	in	r29, 0x3e	; 62
+ 5d4:	0d 85       	ldd	r16, Y+13	; 0x0d
+ 5d6:	ae 84       	ldd	r10, Y+14	; 0x0e
+ 5d8:	bf 84       	ldd	r11, Y+15	; 0x0f
+ 5da:	e8 88       	ldd	r14, Y+16	; 0x10
+ 5dc:	f9 88       	ldd	r15, Y+17	; 0x11
+	uint8_t coordinate = 16*y + x;
+ 5de:	02 95       	swap	r16
+ 5e0:	00 7f       	andi	r16, 0xF0	; 240
+ 5e2:	8c 85       	ldd	r24, Y+12	; 0x0c
+ 5e4:	08 0f       	add	r16, r24
+*	*str指向用于将要显示的内容
+*
+*-------------------------------------------------------------------------------------------------------
+*/
+void showLine(const uint8_t x,const uint8_t y,uint8_t* lcd_stack,char * str,...)
+{
+ 5e6:	de 01       	movw	r26, r28
+ 5e8:	52 96       	adiw	r26, 0x12	; 18
+ 5ea:	5d c0       	rjmp	.+186    	; 0x6a6 <showLine+0xe8>
+	uint8_t coordinate = 16*y + x;
+	va_list marker;
+	va_start(marker,str); /* Initialize variable arguments. */ 
+	while(*str!='\0')
+	{
+		if(coordinate>64) break;	/*防止堆栈溢出*/
+ 5ec:	01 34       	cpi	r16, 0x41	; 65
+ 5ee:	08 f0       	brcs	.+2      	; 0x5f2 <showLine+0x34>
+ 5f0:	5f c0       	rjmp	.+190    	; 0x6b0 <showLine+0xf2>
+
+		if(*str == '\\')
+ 5f2:	8c 35       	cpi	r24, 0x5C	; 92
+ 5f4:	51 f4       	brne	.+20     	; 0x60a <showLine+0x4c>
+		{
+			str++;
+ 5f6:	08 94       	sec
+ 5f8:	e1 1c       	adc	r14, r1
+ 5fa:	f1 1c       	adc	r15, r1
+			lcd_stack[coordinate] = *str;
+ 5fc:	95 01       	movw	r18, r10
+ 5fe:	20 0f       	add	r18, r16
+ 600:	31 1d       	adc	r19, r1
+ 602:	f7 01       	movw	r30, r14
+ 604:	80 81       	ld	r24, Z
+ 606:	f9 01       	movw	r30, r18
+ 608:	49 c0       	rjmp	.+146    	; 0x69c <showLine+0xde>
+		}
+		else if(*str == '%')
+ 60a:	85 32       	cpi	r24, 0x25	; 37
+ 60c:	09 f0       	breq	.+2      	; 0x610 <showLine+0x52>
+ 60e:	43 c0       	rjmp	.+134    	; 0x696 <showLine+0xd8>
+		{
+			str++;
+ 610:	08 94       	sec
+ 612:	e1 1c       	adc	r14, r1
+ 614:	f1 1c       	adc	r15, r1
+			if (*str=='d'||*str=='D')
+ 616:	f7 01       	movw	r30, r14
+ 618:	80 81       	ld	r24, Z
+ 61a:	84 36       	cpi	r24, 0x64	; 100
+ 61c:	11 f0       	breq	.+4      	; 0x622 <showLine+0x64>
+ 61e:	84 34       	cpi	r24, 0x44	; 68
+ 620:	99 f4       	brne	.+38     	; 0x648 <showLine+0x8a>
+			{
+				str++;
+ 622:	08 94       	sec
+ 624:	e1 1c       	adc	r14, r1
+ 626:	f1 1c       	adc	r15, r1
+				decToAscii(&lcd_stack[coordinate],va_arg(marker,uint16_t),(*str-'0'));
+ 628:	52 e0       	ldi	r21, 0x02	; 2
+ 62a:	c5 2e       	mov	r12, r21
+ 62c:	d1 2c       	mov	r13, r1
+ 62e:	ca 0e       	add	r12, r26
+ 630:	db 1e       	adc	r13, r27
+ 632:	6d 91       	ld	r22, X+
+ 634:	7c 91       	ld	r23, X
+ 636:	f7 01       	movw	r30, r14
+ 638:	40 81       	ld	r20, Z
+ 63a:	40 53       	subi	r20, 0x30	; 48
+ 63c:	c5 01       	movw	r24, r10
+ 63e:	80 0f       	add	r24, r16
+ 640:	91 1d       	adc	r25, r1
+ 642:	0e 94 0e 02 	call	0x41c	; 0x41c <decToAscii>
+ 646:	21 c0       	rjmp	.+66     	; 0x68a <showLine+0xcc>
+				coordinate+=(*str-'0'-1);
+			}
+			else if(*str=='c'||*str=='C')
+ 648:	83 36       	cpi	r24, 0x63	; 99
+ 64a:	11 f0       	breq	.+4      	; 0x650 <showLine+0x92>
+ 64c:	83 34       	cpi	r24, 0x43	; 67
+ 64e:	39 f4       	brne	.+14     	; 0x65e <showLine+0xa0>
+			{
+				lcd_stack[coordinate] = va_arg(marker,uint16_t);
+ 650:	f5 01       	movw	r30, r10
+ 652:	e0 0f       	add	r30, r16
+ 654:	f1 1d       	adc	r31, r1
+ 656:	8c 91       	ld	r24, X
+ 658:	80 83       	st	Z, r24
+ 65a:	12 96       	adiw	r26, 0x02	; 2
+ 65c:	20 c0       	rjmp	.+64     	; 0x69e <showLine+0xe0>
+			}
+			else if(*str=='x'||*str=='X')
+ 65e:	88 37       	cpi	r24, 0x78	; 120
+ 660:	11 f0       	breq	.+4      	; 0x666 <showLine+0xa8>
+ 662:	88 35       	cpi	r24, 0x58	; 88
+ 664:	e1 f4       	brne	.+56     	; 0x69e <showLine+0xe0>
+			{
+				str++;
+ 666:	08 94       	sec
+ 668:	e1 1c       	adc	r14, r1
+ 66a:	f1 1c       	adc	r15, r1
+				hexToAscii(&lcd_stack[coordinate],va_arg(marker,uint16_t),(*str-'0'));
+ 66c:	42 e0       	ldi	r20, 0x02	; 2
+ 66e:	c4 2e       	mov	r12, r20
+ 670:	d1 2c       	mov	r13, r1
+ 672:	ca 0e       	add	r12, r26
+ 674:	db 1e       	adc	r13, r27
+ 676:	6d 91       	ld	r22, X+
+ 678:	7c 91       	ld	r23, X
+ 67a:	f7 01       	movw	r30, r14
+ 67c:	40 81       	ld	r20, Z
+ 67e:	40 53       	subi	r20, 0x30	; 48
+ 680:	c5 01       	movw	r24, r10
+ 682:	80 0f       	add	r24, r16
+ 684:	91 1d       	adc	r25, r1
+ 686:	0e 94 5b 02 	call	0x4b6	; 0x4b6 <hexToAscii>
+				coordinate+=(*str-'0'-1);
+ 68a:	01 53       	subi	r16, 0x31	; 49
+ 68c:	f7 01       	movw	r30, r14
+ 68e:	80 81       	ld	r24, Z
+ 690:	08 0f       	add	r16, r24
+ 692:	d6 01       	movw	r26, r12
+ 694:	04 c0       	rjmp	.+8      	; 0x69e <showLine+0xe0>
+			}
+		}
+		/*如有新的转义符指令请添加在这里*/
+		else
+		{
+			lcd_stack[coordinate] = *str;
+ 696:	f5 01       	movw	r30, r10
+ 698:	e0 0f       	add	r30, r16
+ 69a:	f1 1d       	adc	r31, r1
+ 69c:	80 83       	st	Z, r24
+		}
+		str++;
+ 69e:	08 94       	sec
+ 6a0:	e1 1c       	adc	r14, r1
+ 6a2:	f1 1c       	adc	r15, r1
+		coordinate++;
+ 6a4:	0f 5f       	subi	r16, 0xFF	; 255
+void showLine(const uint8_t x,const uint8_t y,uint8_t* lcd_stack,char * str,...)
+{
+	uint8_t coordinate = 16*y + x;
+	va_list marker;
+	va_start(marker,str); /* Initialize variable arguments. */ 
+	while(*str!='\0')
+ 6a6:	f7 01       	movw	r30, r14
+ 6a8:	80 81       	ld	r24, Z
+ 6aa:	88 23       	and	r24, r24
+ 6ac:	09 f0       	breq	.+2      	; 0x6b0 <showLine+0xf2>
+ 6ae:	9e cf       	rjmp	.-196    	; 0x5ec <showLine+0x2e>
+		}
+		str++;
+		coordinate++;
+	}
+	va_end( marker ); /* Reset variable arguments. */ 
+}
+ 6b0:	cf 91       	pop	r28
+ 6b2:	df 91       	pop	r29
+ 6b4:	0f 91       	pop	r16
+ 6b6:	ff 90       	pop	r15
+ 6b8:	ef 90       	pop	r14
+ 6ba:	df 90       	pop	r13
+ 6bc:	cf 90       	pop	r12
+ 6be:	bf 90       	pop	r11
+ 6c0:	af 90       	pop	r10
+ 6c2:	08 95       	ret
+
+000006c4 <main>:
+#include <ws_at24cxx_port.h>
+#include <ws_lcd_ST7920_port.h>
+
+
+int main(void)
+{
+ 6c4:	ff 92       	push	r15
+ 6c6:	0f 93       	push	r16
+ 6c8:	1f 93       	push	r17
+ 6ca:	df 93       	push	r29
+ 6cc:	cf 93       	push	r28
+ 6ce:	0f 92       	push	r0
+ 6d0:	cd b7       	in	r28, 0x3d	; 61
+ 6d2:	de b7       	in	r29, 0x3e	; 62
+	uint8_t adr,WrDat,t;	
+	uint8_t *pRdDat=&t;	//随便给"*pRdDat"一个具体地址，以免内存发生错误
+
+	st7920LcdInit(); /*LCD初始化*/
+ 6d4:	0e 94 c2 02 	call	0x584	; 0x584 <st7920LcdInit>
+	showLine(0,0,lcd_buffer,"深圳微雪电子");
+ 6d8:	00 d0       	rcall	.+0      	; 0x6da <main+0x16>
+ 6da:	00 d0       	rcall	.+0      	; 0x6dc <main+0x18>
+ 6dc:	00 d0       	rcall	.+0      	; 0x6de <main+0x1a>
+ 6de:	ed b7       	in	r30, 0x3d	; 61
+ 6e0:	fe b7       	in	r31, 0x3e	; 62
+ 6e2:	31 96       	adiw	r30, 0x01	; 1
+ 6e4:	ad b7       	in	r26, 0x3d	; 61
+ 6e6:	be b7       	in	r27, 0x3e	; 62
+ 6e8:	11 96       	adiw	r26, 0x01	; 1
+ 6ea:	1c 92       	st	X, r1
+ 6ec:	11 82       	std	Z+1, r1	; 0x01
+ 6ee:	0c e2       	ldi	r16, 0x2C	; 44
+ 6f0:	11 e0       	ldi	r17, 0x01	; 1
+ 6f2:	13 83       	std	Z+3, r17	; 0x03
+ 6f4:	02 83       	std	Z+2, r16	; 0x02
+ 6f6:	80 e0       	ldi	r24, 0x00	; 0
+ 6f8:	91 e0       	ldi	r25, 0x01	; 1
+ 6fa:	95 83       	std	Z+5, r25	; 0x05
+ 6fc:	84 83       	std	Z+4, r24	; 0x04
+ 6fe:	0e 94 df 02 	call	0x5be	; 0x5be <showLine>
+	showLine(0,1,lcd_buffer,"AT24CX实验");
+ 702:	ed b7       	in	r30, 0x3d	; 61
+ 704:	fe b7       	in	r31, 0x3e	; 62
+ 706:	31 96       	adiw	r30, 0x01	; 1
+ 708:	ad b7       	in	r26, 0x3d	; 61
+ 70a:	be b7       	in	r27, 0x3e	; 62
+ 70c:	11 96       	adiw	r26, 0x01	; 1
+ 70e:	1c 92       	st	X, r1
+ 710:	81 e0       	ldi	r24, 0x01	; 1
+ 712:	81 83       	std	Z+1, r24	; 0x01
+ 714:	13 83       	std	Z+3, r17	; 0x03
+ 716:	02 83       	std	Z+2, r16	; 0x02
+ 718:	8d e0       	ldi	r24, 0x0D	; 13
+ 71a:	91 e0       	ldi	r25, 0x01	; 1
+ 71c:	95 83       	std	Z+5, r25	; 0x05
+ 71e:	84 83       	std	Z+4, r24	; 0x04
+ 720:	0e 94 df 02 	call	0x5be	; 0x5be <showLine>
+	showLine(0,2,lcd_buffer,"读取结果：");
+ 724:	ed b7       	in	r30, 0x3d	; 61
+ 726:	fe b7       	in	r31, 0x3e	; 62
+ 728:	31 96       	adiw	r30, 0x01	; 1
+ 72a:	ad b7       	in	r26, 0x3d	; 61
+ 72c:	be b7       	in	r27, 0x3e	; 62
+ 72e:	11 96       	adiw	r26, 0x01	; 1
+ 730:	1c 92       	st	X, r1
+ 732:	62 e0       	ldi	r22, 0x02	; 2
+ 734:	f6 2e       	mov	r15, r22
+ 736:	f1 82       	std	Z+1, r15	; 0x01
+ 738:	13 83       	std	Z+3, r17	; 0x03
+ 73a:	02 83       	std	Z+2, r16	; 0x02
+ 73c:	88 e1       	ldi	r24, 0x18	; 24
+ 73e:	91 e0       	ldi	r25, 0x01	; 1
+ 740:	95 83       	std	Z+5, r25	; 0x05
+ 742:	84 83       	std	Z+4, r24	; 0x04
+ 744:	0e 94 df 02 	call	0x5be	; 0x5be <showLine>
+	refreshLCD(lcd_buffer); /*刷新LCD*/
+ 748:	8d b7       	in	r24, 0x3d	; 61
+ 74a:	9e b7       	in	r25, 0x3e	; 62
+ 74c:	06 96       	adiw	r24, 0x06	; 6
+ 74e:	0f b6       	in	r0, 0x3f	; 63
+ 750:	f8 94       	cli
+ 752:	9e bf       	out	0x3e, r25	; 62
+ 754:	0f be       	out	0x3f, r0	; 63
+ 756:	8d bf       	out	0x3d, r24	; 61
+ 758:	c8 01       	movw	r24, r16
+ 75a:	0e 94 d0 01 	call	0x3a0	; 0x3a0 <refreshLCD>
+
+void twi_init()	 	 	//TWI(I2C)初始化
+{
+/*Hardware Environment：DVK501 && M128+ EX*/
+#if defined(_DVK501_M128_EX_)
+	TWBR = 0X0F;		//设置TWI波特率  
+ 75e:	8f e0       	ldi	r24, 0x0F	; 15
+ 760:	80 93 70 00 	sts	0x0070, r24
+	TWSR &= 0XFC;		//设置TWI预分频 为 1
+ 764:	80 91 71 00 	lds	r24, 0x0071
+ 768:	8c 7f       	andi	r24, 0xFC	; 252
+ 76a:	80 93 71 00 	sts	0x0071, r24
+	adr=0x00;
+	WrDat='P';
+	twi_init();		
+	if( I2C_Write(AT24C_WR_ADDR,adr,WrDat)!=I2C_ERR )	//AT24CXX写成功？
+ 76e:	80 ea       	ldi	r24, 0xA0	; 160
+ 770:	90 e0       	ldi	r25, 0x00	; 0
+ 772:	60 e0       	ldi	r22, 0x00	; 0
+ 774:	40 e5       	ldi	r20, 0x50	; 80
+ 776:	0e 94 06 01 	call	0x20c	; 0x20c <I2C_Write>
+ 77a:	88 23       	and	r24, r24
+ 77c:	09 f4       	brne	.+2      	; 0x780 <main+0xbc>
+ 77e:	45 c0       	rjmp	.+138    	; 0x80a <main+0x146>
+ 780:	84 ef       	ldi	r24, 0xF4	; 244
+ 782:	91 e0       	ldi	r25, 0x01	; 1
+ 784:	28 eb       	ldi	r18, 0xB8	; 184
+ 786:	30 e0       	ldi	r19, 0x00	; 0
+ 788:	f9 01       	movw	r30, r18
+ 78a:	31 97       	sbiw	r30, 0x01	; 1
+ 78c:	f1 f7       	brne	.-4      	; 0x78a <main+0xc6>
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 78e:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 790:	d9 f7       	brne	.-10     	; 0x788 <main+0xc4>
+	{
+		_delay_ms(50);	//等待EERPOM写完
+		if( I2C_Read(AT24C_WR_ADDR,adr,AT24C_RD_ADDR,pRdDat)!=I2C_ERR )	//AT24CXX读成功？
+ 792:	80 ea       	ldi	r24, 0xA0	; 160
+ 794:	90 e0       	ldi	r25, 0x00	; 0
+ 796:	60 e0       	ldi	r22, 0x00	; 0
+ 798:	41 ea       	ldi	r20, 0xA1	; 161
+ 79a:	9e 01       	movw	r18, r28
+ 79c:	2f 5f       	subi	r18, 0xFF	; 255
+ 79e:	3f 4f       	sbci	r19, 0xFF	; 255
+ 7a0:	0e 94 2b 01 	call	0x256	; 0x256 <I2C_Read>
+ 7a4:	2c e2       	ldi	r18, 0x2C	; 44
+ 7a6:	31 e0       	ldi	r19, 0x01	; 1
+ 7a8:	88 23       	and	r24, r24
+ 7aa:	f9 f0       	breq	.+62     	; 0x7ea <main+0x126>
+			showLine(10,2,lcd_buffer,"%c",*pRdDat);
+ 7ac:	ad b7       	in	r26, 0x3d	; 61
+ 7ae:	be b7       	in	r27, 0x3e	; 62
+ 7b0:	18 97       	sbiw	r26, 0x08	; 8
+ 7b2:	0f b6       	in	r0, 0x3f	; 63
+ 7b4:	f8 94       	cli
+ 7b6:	be bf       	out	0x3e, r27	; 62
+ 7b8:	0f be       	out	0x3f, r0	; 63
+ 7ba:	ad bf       	out	0x3d, r26	; 61
+ 7bc:	ed b7       	in	r30, 0x3d	; 61
+ 7be:	fe b7       	in	r31, 0x3e	; 62
+ 7c0:	31 96       	adiw	r30, 0x01	; 1
+ 7c2:	8a e0       	ldi	r24, 0x0A	; 10
+ 7c4:	11 96       	adiw	r26, 0x01	; 1
+ 7c6:	8c 93       	st	X, r24
+ 7c8:	82 e0       	ldi	r24, 0x02	; 2
+ 7ca:	81 83       	std	Z+1, r24	; 0x01
+ 7cc:	33 83       	std	Z+3, r19	; 0x03
+ 7ce:	22 83       	std	Z+2, r18	; 0x02
+ 7d0:	83 e2       	ldi	r24, 0x23	; 35
+ 7d2:	91 e0       	ldi	r25, 0x01	; 1
+ 7d4:	95 83       	std	Z+5, r25	; 0x05
+ 7d6:	84 83       	std	Z+4, r24	; 0x04
+ 7d8:	89 81       	ldd	r24, Y+1	; 0x01
+ 7da:	86 83       	std	Z+6, r24	; 0x06
+ 7dc:	17 82       	std	Z+7, r1	; 0x07
+ 7de:	0e 94 df 02 	call	0x5be	; 0x5be <showLine>
+ 7e2:	8d b7       	in	r24, 0x3d	; 61
+ 7e4:	9e b7       	in	r25, 0x3e	; 62
+ 7e6:	08 96       	adiw	r24, 0x08	; 8
+ 7e8:	27 c0       	rjmp	.+78     	; 0x838 <main+0x174>
+		else
+			showLine(10,2,lcd_buffer,"error");	//读取错误，反馈错误信号
+ 7ea:	00 d0       	rcall	.+0      	; 0x7ec <main+0x128>
+ 7ec:	00 d0       	rcall	.+0      	; 0x7ee <main+0x12a>
+ 7ee:	00 d0       	rcall	.+0      	; 0x7f0 <main+0x12c>
+ 7f0:	ed b7       	in	r30, 0x3d	; 61
+ 7f2:	fe b7       	in	r31, 0x3e	; 62
+ 7f4:	31 96       	adiw	r30, 0x01	; 1
+ 7f6:	8a e0       	ldi	r24, 0x0A	; 10
+ 7f8:	ad b7       	in	r26, 0x3d	; 61
+ 7fa:	be b7       	in	r27, 0x3e	; 62
+ 7fc:	11 96       	adiw	r26, 0x01	; 1
+ 7fe:	8c 93       	st	X, r24
+ 800:	82 e0       	ldi	r24, 0x02	; 2
+ 802:	81 83       	std	Z+1, r24	; 0x01
+ 804:	33 83       	std	Z+3, r19	; 0x03
+ 806:	22 83       	std	Z+2, r18	; 0x02
+ 808:	0e c0       	rjmp	.+28     	; 0x826 <main+0x162>
+	}	
+	else
+		showLine(10,2,lcd_buffer,"error");	//写入错误，反馈错误信号
+ 80a:	00 d0       	rcall	.+0      	; 0x80c <main+0x148>
+ 80c:	00 d0       	rcall	.+0      	; 0x80e <main+0x14a>
+ 80e:	00 d0       	rcall	.+0      	; 0x810 <main+0x14c>
+ 810:	ed b7       	in	r30, 0x3d	; 61
+ 812:	fe b7       	in	r31, 0x3e	; 62
+ 814:	31 96       	adiw	r30, 0x01	; 1
+ 816:	8a e0       	ldi	r24, 0x0A	; 10
+ 818:	ad b7       	in	r26, 0x3d	; 61
+ 81a:	be b7       	in	r27, 0x3e	; 62
+ 81c:	11 96       	adiw	r26, 0x01	; 1
+ 81e:	8c 93       	st	X, r24
+ 820:	f1 82       	std	Z+1, r15	; 0x01
+ 822:	13 83       	std	Z+3, r17	; 0x03
+ 824:	02 83       	std	Z+2, r16	; 0x02
+ 826:	86 e2       	ldi	r24, 0x26	; 38
+ 828:	91 e0       	ldi	r25, 0x01	; 1
+ 82a:	95 83       	std	Z+5, r25	; 0x05
+ 82c:	84 83       	std	Z+4, r24	; 0x04
+ 82e:	0e 94 df 02 	call	0x5be	; 0x5be <showLine>
+ 832:	8d b7       	in	r24, 0x3d	; 61
+ 834:	9e b7       	in	r25, 0x3e	; 62
+ 836:	06 96       	adiw	r24, 0x06	; 6
+ 838:	0f b6       	in	r0, 0x3f	; 63
+ 83a:	f8 94       	cli
+ 83c:	9e bf       	out	0x3e, r25	; 62
+ 83e:	0f be       	out	0x3f, r0	; 63
+ 840:	8d bf       	out	0x3d, r24	; 61
+
+	refreshLCD(lcd_buffer); /*刷新LCD*/
+ 842:	8c e2       	ldi	r24, 0x2C	; 44
+ 844:	91 e0       	ldi	r25, 0x01	; 1
+ 846:	0e 94 d0 01 	call	0x3a0	; 0x3a0 <refreshLCD>
+ 84a:	ff cf       	rjmp	.-2      	; 0x84a <main+0x186>
+
+0000084c <__udivmodhi4>:
+ 84c:	aa 1b       	sub	r26, r26
+ 84e:	bb 1b       	sub	r27, r27
+ 850:	51 e1       	ldi	r21, 0x11	; 17
+ 852:	07 c0       	rjmp	.+14     	; 0x862 <__udivmodhi4_ep>
+
+00000854 <__udivmodhi4_loop>:
+ 854:	aa 1f       	adc	r26, r26
+ 856:	bb 1f       	adc	r27, r27
+ 858:	a6 17       	cp	r26, r22
+ 85a:	b7 07       	cpc	r27, r23
+ 85c:	10 f0       	brcs	.+4      	; 0x862 <__udivmodhi4_ep>
+ 85e:	a6 1b       	sub	r26, r22
+ 860:	b7 0b       	sbc	r27, r23
+
+00000862 <__udivmodhi4_ep>:
+ 862:	88 1f       	adc	r24, r24
+ 864:	99 1f       	adc	r25, r25
+ 866:	5a 95       	dec	r21
+ 868:	a9 f7       	brne	.-22     	; 0x854 <__udivmodhi4_loop>
+ 86a:	80 95       	com	r24
+ 86c:	90 95       	com	r25
+ 86e:	bc 01       	movw	r22, r24
+ 870:	cd 01       	movw	r24, r26
+ 872:	08 95       	ret
+
+00000874 <memset>:
+ 874:	dc 01       	movw	r26, r24
+ 876:	01 c0       	rjmp	.+2      	; 0x87a <memset+0x6>
+ 878:	6d 93       	st	X+, r22
+ 87a:	41 50       	subi	r20, 0x01	; 1
+ 87c:	50 40       	sbci	r21, 0x00	; 0
+ 87e:	e0 f7       	brcc	.-8      	; 0x878 <memset+0x4>
+ 880:	08 95       	ret
+
+00000882 <_exit>:
+ 882:	f8 94       	cli
+
+00000884 <__stop_program>:
+ 884:	ff cf       	rjmp	.-2      	; 0x884 <__stop_program>

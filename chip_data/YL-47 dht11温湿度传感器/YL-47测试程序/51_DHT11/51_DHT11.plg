@@ -1,0 +1,27 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Bonsteen\Desktop\温度控制器课程设计\【Realplay】DHT11温度模块+湿度模块+温湿度模块+DHT11传感器\YL-47 dht11 资料\YL-47测试程序\51_DHT11\51_DHT21.uvproj
+Project File Date:  04/17/2018
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling 51_DHT21.c...
+51_DHT21.C(170): warning C280: 'i': unreferenced local variable
+51_DHT21.C(170): warning C280: 'j': unreferenced local variable
+51_DHT21.C(52): warning C290: missing return value
+linking...
+Program Size: data=56.0 xdata=0 code=632
+creating hex file from "51_DHT11"...
+"51_DHT11" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling 51_DHT21.c...
+51_DHT21.C(170): warning C280: 'i': unreferenced local variable
+51_DHT21.C(170): warning C280: 'j': unreferenced local variable
+51_DHT21.C(52): warning C290: missing return value
+linking...
+Program Size: data=56.0 xdata=0 code=632
+creating hex file from "51_DHT11"...
+"51_DHT11" - 0 Error(s), 3 Warning(s).

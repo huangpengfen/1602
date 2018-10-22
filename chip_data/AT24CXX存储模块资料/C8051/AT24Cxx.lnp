@@ -1,0 +1,3 @@
+"AT24Cxx.obj" 
+TO "AT24Cxx" 
+RAMSIZE(256) 
